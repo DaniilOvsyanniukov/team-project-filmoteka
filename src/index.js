@@ -6,10 +6,11 @@ import genreMarkup from './templates/movie-genre.hbs';
 import ApiServise from './js/api-service';
 
 const apiServise = new ApiServise();
+let GENRES = apiServise.fetchGenres();
+console.log(GENRES);
 
 apiServise.fetchPopularMovies().then(results => {
   renderMarkup(results);
-  console.log(findGenreById(results[1].genre_ids));
 });
 
 refs.searchForm.addEventListener('submit', onSearchForm);
@@ -40,7 +41,10 @@ function clearInput(e) {
 
 function renderMarkup(results) {
   refs.gallery.insertAdjacentHTML('beforeend', movieMarkup(results));
-  refs.gallery.insertAdjacentHTML('beforeend', genreMarkup(findGenreById(results[1].genre_ids)));
+  refs.gallery.insertAdjacentHTML(
+    'beforeend',
+    genreMarkup(results.map(result => findGenreById(result.genre_ids))),
+  );
 }
 
 function findGenreById(arr) {
@@ -74,6 +78,10 @@ function findGenreById(arr) {
       }
     });
   });
+
+  if (genres.length > 2) {
+    genres.splice(2, 5, 'other');
+  }
 
   return genres;
 }

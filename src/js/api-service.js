@@ -26,6 +26,15 @@ export default class ApiServise {
       });
   }
 
+  fetchGenres() {
+    const url = `${BASE_URL}/genre/movie/list?api_key=${API_KEY}&language=en-US`;
+    return fetch(url)
+      .then(response => response.json())
+      .then(({ genres }) => {
+        return genres;
+      });
+  }
+
   incrementPage() {
     this.page += 1;
   }
