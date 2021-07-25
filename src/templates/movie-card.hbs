@@ -1,0 +1,14 @@
+{{#each this}}
+  <li class='movie-card'>
+    <div class='movie-body'>
+      <img
+        src='https://image.tmdb.org/t/p/original/{{backdrop_path}}'
+        alt='{{original_title}}'
+        class='movie-image'
+      />
+    </div>
+    <div class='movie-about'>
+      <p class='movie-title'>{{original_title}}</p>
+    </div>
+  </li>
+{{/each}}
