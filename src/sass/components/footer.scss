@@ -1,0 +1,54 @@
+.container {
+  width: 100%;
+
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.footer {
+  background-color: var(--pagination-and-footer-background);
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  height: 100px;
+  width: 100%;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: var(--footer-color-text);
+}
+
+.footer-open-modal {
+  text-decoration-line: underline;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    color: var(--header-line-and-numbers);
+  }
+}
+
+.footer-block {
+  justify-content: center;
+
+  margin: auto;
+  flex-direction: column;
+  max-width: 236px;
+  flex-wrap: wrap;
+
+  @media screen and (min-width: 768px) {
+    max-width: 100%;
+  }
+}
+
+// иконка
+.footer-icon {
+  width: 14px;
+  height: 13px;
+  margin-top: 10px;
+}
