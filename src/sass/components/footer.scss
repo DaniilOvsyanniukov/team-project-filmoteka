@@ -1,0 +1,19 @@
+.footer {
+  background-color: var(--pagination-and-footer-background);
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  height: 100px;
+  width: 100%;
+
+  padding-top: 29px;
+
+  font-size: 14px;
+  color: var(--footer-color-text);
+}
+
+// иконка
+.footer-icon {
+  width: 14px;
+  height: 13px;
+}
