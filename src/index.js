@@ -7,6 +7,11 @@ import ApiServise from './js/api-service';
 
 const apiServise = new ApiServise();
 
+apiServise.fetchPopularMovies().then(results => {
+  renderMarkup(results);
+  console.log(findGenreById(results[1].genre_ids));
+});
+
 refs.searchForm.addEventListener('submit', onSearchForm);
 
 function onSearchForm(e) {
@@ -25,12 +30,6 @@ function onSearchForm(e) {
   });
 }
 
-// function fetchGenres() {
-//   apiServise.fetchMovies().then(results => {
-//     results.map(result => genreMarkup(findGenreById(result.genre_ids)));
-//   });
-// }
-
 function clearGallery() {
   refs.gallery.innerHTML = '';
 }
@@ -41,10 +40,7 @@ function clearInput(e) {
 
 function renderMarkup(results) {
   refs.gallery.insertAdjacentHTML('beforeend', movieMarkup(results));
-  //   refs.gallery.insertAdjacentHTML(
-  //     'beforeend',
-  //     genreMarkup(results.map(result => genreMarkup(findGenreById(result.genre_ids)))),
-  //   );
+  refs.gallery.insertAdjacentHTML('beforeend', genreMarkup(findGenreById(results[1].genre_ids)));
 }
 
 function findGenreById(arr) {

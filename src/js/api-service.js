@@ -7,6 +7,15 @@ export default class ApiServise {
     this.searchQuery = '';
   }
 
+  fetchPopularMovies() {
+    const url = `${BASE_URL}/trending/all/day?api_key=${API_KEY}`;
+    return fetch(url)
+      .then(response => response.json())
+      .then(({ results }) => {
+        return results;
+      });
+  }
+
   fetchMoviesByRequest() {
     const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${this.searchQuery}&page=${this.page}&include_adult=false`;
     return fetch(url)
