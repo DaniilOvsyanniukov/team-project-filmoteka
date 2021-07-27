@@ -23,9 +23,12 @@
   color: var(--footer-color-text);
 }
 
-.footer-open-modal {
+.footer-button {
+  color: var(--footer-color-text);
   text-decoration-line: underline;
   cursor: pointer;
+  border: none;
+  background-color: var(--pagination-and-footer-background);
 
   &:hover,
   &:focus {

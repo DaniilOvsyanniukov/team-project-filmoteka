@@ -1,0 +1,90 @@
+.lightbox {
+  position: fixed;
+  display: table;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100;
+
+  &.lightbox__content {
+    transform: scale(1.1);
+    transition: opacity var(--animation-duration) var(--timing-function);
+    .modal-background {
+      .lightbox__content {
+        transform: scale(0);
+        animation: zoomIn 0.5s 0.8s var(--timing-function) forwards;
+      }
+    }
+  }
+
+  //   &.visually-hidden {
+  //     transform: scale(1);
+  //     animation: unfoldOut 1s 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  //     .modal-background {
+  //       .modal {
+  //         animation: zoomOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  //       }
+  //     }
+  //   }
+}
+
+.modal-background {
+  display: table-cell;
+  background: rgba(0, 0, 0, 0.8);
+  text-align: center;
+  vertical-align: middle;
+
+  .lightbox__content {
+    background: var(--white);
+    padding: 50px;
+    display: inline-block;
+    border-radius: 4px;
+    position: relative;
+  }
+}
+
+//====================card-team====================
+
+.team {
+  list-style: none;
+  display: grid;
+  grid-template-rows: 1fr;
+  /* grid-template-columns: 1fr 1fr 1fr; */
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 3vw;
+}
+
+.team-position {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 35px;
+  margin-bottom: 10px;
+
+  color: var(--black);
+}
+
+.lightbox__image {
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+.contacts-link-type {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 16px;
+}
+
+//-----------------------links--------------
+
+.modal-links {
+  margin-top: 10px;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.team-link:not(:last-child) {
+  margin-bottom: 10px;
+}
