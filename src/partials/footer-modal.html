@@ -1,17 +1,17 @@
 <div class="lightbox js-lightbox visually-hidden">
-  <!-- <div class="lightbox__overlay"></div> -->
   <div class="modal-background">
     <div class="lightbox__content">
       <ul class="team">
         <!------------------------------- Daniil -------------------------------------------->
         <li class="team-list">
-          <h2 class="team-position">Daniil Ovsyanniukov</h2>
+          
           <img
             class="lightbox__image"
             src="./images/modal-team/daniil.jpg"
             alt="photo Daniil Ovsyanniukov"
             width="200px"
           />
+          <h2 class="team-name">Daniil Ovsyanniukov</h2>
           <span class="contacts-link-type">Team Lead</span>
           <div class="modal-links">
             <a
@@ -40,13 +40,14 @@
         </li>
         <!------------------------------- Anastasiia -------------------------------------------->
         <li class="team-list">
-          <h2 class="team-position">Anastasiia Sanatar</h2>
+          
           <img
             class="lightbox__image"
             src="./images/modal-team/nastya.jpg"
             alt="photo Anastasiia Sanatar"
             width="200px"
           />
+          <h2 class="team-name ">Anastasiia Sanatar</h2>
           <span class="contacts-link-type">Scrum Master</span>
         <div class="modal-links">
           <a
@@ -70,14 +71,15 @@
         </li>
         <!------------------------------- Yaroslav -------------------------------------------->
         <li class="team-list">
-          <h2 class="team-position">Yaroslav Petrukhin</h2>
+          
           <img 
             class="lightbox__image" 
-            src="https://media-exp1.licdn.com/dms/image/C4D03AQEQIR5p6Wm22g/profile-displayphoto-shrink_200_200/0/1604394365744?e=1632960000&v=beta&t=7UNOgCec2N5GxIfQCkY8GHW82NFWQoXdx7L-HfFeCkY" 
+            src="./images/modal-team/yaroslav.jpg" 
             alt="photo Yaroslav Petrukhin" 
             width="200px" 
           />
-          <span class="contacts-link-type">heder</span>
+          <h2 class="team-name ">Yaroslav Petrukhin</h2>
+          <span class="contacts-link-type">header</span>
         <div class="modal-links">
           <a
             class="team-link"
@@ -100,13 +102,14 @@
         </li>
         <!------------------------------- Anton -------------------------------------------->
         <li class="team-list">
-          <h2 class="team-position">Anton Tymchenko</h2>
+          
           <img
             class="lightbox__image"
             src="https://media-exp1.licdn.com/dms/image/C5603AQEw6tg2YCGntg/profile-displayphoto-shrink_200_200/0/1626780605366?e=1632960000&v=beta&t=Ez_CE_XFutkKqzGbzKz2cu0jCcbRVSOt-mAmtdXqCLc"
             alt="photo Anton Tymchenko"
             width="200px"
           />
+          <h2 class="team-name ">Anton Tymchenko</h2>
           <span class="contacts-link-type">library</span>
         <div class="modal-links">
           <a
@@ -130,8 +133,9 @@
         </li>
         <!------------------------------- Arthur -------------------------------------------->
         <li class="team-list">
-          <h2 class="team-position">Arthur Kutusenko</h2>
+          
           <img class="lightbox__image" src="./images/modal-team/artur.png" alt="photo Arthur Kutusenko" width="200px" />
+          <h2 class="team-name ">Arthur Kutusenko</h2>
           <span class="contacts-link-type">input</span>
         <div class="modal-links">
           <a class="team-link" href="https://www.linkedin.com/in/arthur-kutusenko/" target="_blank">
@@ -151,8 +155,9 @@
         </li>
         <!------------------------------- Eugene -------------------------------------------->
         <li class="team-list">
-          <h2 class="team-position">Eugene Ivanov</h2>
+          
           <img class="lightbox__image" src="" alt="photo Eugene Ivanov" width="200px" />
+          <h2 class="team-name ">Eugene Ivanov</h2>
           <span class="contacts-link-type">modal card</span>
         <div class="modal-links">
           <a class="team-link" href="https://www.linkedin.com" target="_blank"> <svg class="social-link-icon">
@@ -168,8 +173,9 @@
         </li>
         <!------------------------------- Ihor -------------------------------------------->
         <li class="team-list">
-          <h2 class="team-position">Ihor Pshenychnyi</h2>
+          
           <img class="lightbox__image" src="" alt="photo Ihor Pshenychnyi" width="200px" />
+          <h2 class="team-name">Ihor Pshenychnyi</h2>
           <span class="contacts-link-type">pagination</span>
         <div class="modal-links">
           <a class="team-link" href="https://www.linkedin.com" target="_blank"> <svg class="social-link-icon">
@@ -187,5 +193,9 @@
     </div>
   </div>
 
-  <button type="button" class="lightbox__button" data-action="close-lightbox"></button>
+  <button type="button" class="lightbox__button" data-action="close-lightbox">
+    <svg width="35" height="35" class="close-modal-button">
+      <use href="./images/sprite.svg#icon-close-modal-button"></use>
+    </svg>
+  </button>
 </div>
