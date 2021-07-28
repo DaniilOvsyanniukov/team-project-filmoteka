@@ -27,5 +27,6 @@
   },
   "dependencies": {
     "js": "^0.1.0"
+    "animate.css": "^4.1.1"
   }
 }
