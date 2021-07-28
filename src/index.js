@@ -1,4 +1,6 @@
 import './sass/main.scss';
-//import './js/components/footer-modal';
 
+//Arthur Kutusenko (input + movies gallery)
+import './js/input.js';
+//import './js/components/footer-modal';
 
