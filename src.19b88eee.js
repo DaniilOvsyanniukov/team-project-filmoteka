@@ -17,4 +17,4 @@ const o={openFooterModal:document.querySelector('[data-action="open-lightbox"]')
 },{}],"Focm":[function(require,module,exports) {
 "use strict";require("./sass/main.scss"),require("./js/input.js"),require("./js//footer-modal.js");
 },{"./sass/main.scss":"clu1","./js/input.js":"vYOj","./js//footer-modal.js":"zUU9"}]},{},["Focm"], null)
-//# sourceMappingURL=/team-project-filmoteka/src.3fedcfd3.js.map
+//# sourceMappingURL=/team-project-filmoteka/src.19b88eee.js.map
