@@ -1,44 +1,60 @@
 <div class="modal-movie-card" data-id={{id}}>
     <div class="modal-poster-container">
-        <img src="{{backdrop_path}}" alt="{{original_title}} poster">
+        <img src="https://image.tmdb.org/t/p/w154{{poster_path}}" alt="{{original_title}} poster" data-id={{id}}>
     </div>
-    
+
     <div class="card-descr-container">
-    
+
         <h1 class="modal-movie-title">{{title}}</h1>
-    
-        <p class="vote">Vote / Votes
-            <span>{{vote_average}}</span>
-            <span>/</span>
-            <span>{{vote_count}}</span>
-        </p>
-    
-        <p class="popularity">Popularity
-            <span>{{popularity}}</span>
-        </p>
-    
-        <p class="original-title">Original Title
-            <span>{{original_title}}</span>
-        </p>
-    
-        <p class="genre">Genre
-            <span>{{genres}}</span>
-        </p>
-    
+
+        <div class="card-descr-elements">
+
+            <p class="elem">Vote / Votes
+                <span class="vote"> <span class="vote-average">{{vote_average}}</span> / <span
+                        class="vote-count">{{vote_count}}</span></span>
+            </p>
+
+            <p class="elem">Popularity
+                <span class="pop">{{popularity}}</span>
+            </p>
+
+            <p class="elem">Original Title
+                <span class="original">{{original_title}}</span>
+            </p>
+
+            <p class="elem">Genre{{#each genres}}
+                <span class="genre">{{this.name}}</span>
+                {{/each}}
+            </p>
+
+        </div>
+
         <p class="modal-about">About</p>
         <p class="modal-movie-description">{{overview}}</p>
     </div>
-    <div class="modal-btn-contaainer">
+    
+    <div class="btn-container">
 
-        <label class="label">
-            <input type="checkbox" value="Watched" class="watched-btn" />
-            <span class="storage__btn" id="js-watched-btn">Add To Watched</span>
-        </label>
+        <button type='button' 
+        class="watched" 
+        data-id={{id}}
+        data-backdrop={{backdrop_path}}
+        data-title={{original_title}}
+        data-poster={{poster_path}}
+        data-genre={{genre_ids}}
+        data-release={{release_date}}>Add to watched</button>
         
-        <label class="label">
-            <input type="checkbox" value="Queue" class="queue-btn" />
-            <span class="storage__btn" id="js-queue-btn">Add To Queue</span>
-        </label>
-        
+        <button type='button' 
+        class="queue" 
+        data-id={{id}}
+        data-backdrop={{backdrop_path}}
+        data-title={{original_title}}
+        data-poster={{poster_path}}
+        data-genre={{genre_ids}}
+        data-release={{release_date}}>Add to queue</button>
+
     </div>
+    
+
 </div>
+
