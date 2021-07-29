@@ -18,15 +18,21 @@
             </ul>
         </nav>
 
-        <span class="input-wrapper visually-hidden">
-            <input type="text" placeholder="Поиск фильмов" class="search-input">   
-            <svg class="search-input-icon" width="12" height="12">
-                <use href="./images/sprite.svg#icon-search"></use>
-            </svg>
+        <span class="input-wrapper">
+            <form action="" class="search-form">
+                <input class="search-form-input" 
+                    type="text" 
+                    name="query" 
+                    placeholder="Поиск фильмов" 
+                    autocomplete="off">   
+                <svg class="search-input-icon" width="12" height="12">
+                    <use href="./images/sprite.svg#icon-search"></use>
+                </svg>
+            </form>
         </span>
         
 
-        <ul class="buttons list ">
+        <ul class="buttons list visually-hidden">
             <li class="buttons-item">
                 <button type="button" class="library-btn enabled-btn">Watched</button>
             </li>
