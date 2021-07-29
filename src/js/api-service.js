@@ -5,7 +5,6 @@ export default class ApiServise {
   constructor() {
     this.page = 1;
     this.searchQuery = '';
-    this.movieId;
   }
 
   fetchPopularMovies() {

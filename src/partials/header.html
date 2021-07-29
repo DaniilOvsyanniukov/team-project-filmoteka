@@ -1,25 +1,46 @@
-<section class="header">
+<header class="header">
     <div class="container">
         <nav class="nav">
-            <a href="./index.html" class="main-page-link">Filmoteka</a>
+            <a href="./index.html" class="main-page-link">
+                <svg class="header-logo">
+                    <use href="./images/sprite.svg#icon-film"></use>
+                </svg>
+                Filmoteka
+            </a>
 
-            <ul class="nav-list">
+            <ul class="nav-list list">
                 <li class="nav-list-item">
-                    <a href="" class="nav-list-link">Home<a>
+                    <a href="" class="nav-list-link current-page">Home<a>
                 </li>
-                <li class="nav-list-link">
+                <li class="nav-list-item">
                     <a href="" class="nav-list-link">My library</a>
                 </li>
             </ul>
         </nav>
 
-        <input type="text" placeholder="Поиск фильмов " class="search-query">   
+        <span class="input-wrapper">
+            <form action="" class="search-form">
+                <input class="search-form-input" 
+                    type="text" 
+                    name="query" 
+                    placeholder="Поиск фильмов" 
+                    autocomplete="off">   
+                <svg class="search-input-icon" width="12" height="12">
+                    <use href="./images/sprite.svg#icon-search"></use>
+                </svg>
+            </form>
+        </span>
+        
 
-        <div class="buttons-container visually-hidden">
-            <button type="button" class="watched-btn">Watched</button>
-            <button type="button" class="queue-btn">Queue</button>
-        </div>
+        <ul class="buttons list visually-hidden">
+            <li class="buttons-item">
+                <button type="button" class="library-btn enabled-btn">Watched</button>
+            </li>
+            <li class="buttons-item">
+                <button type="button" class="library-btn disabled-btn">Queue</button>
+            </li>
+        </ul>
 
     </div>
 
-</section>
+</header>

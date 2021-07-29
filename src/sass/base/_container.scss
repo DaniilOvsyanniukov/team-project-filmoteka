@@ -1,21 +1,27 @@
 .container {
   width: 100%;
   margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
 
   // outline: 2px solid coral;
 
   @media screen and (max-width: 479px) {
-    width: 00px;
+    width: 280px;
   }
   @media screen and (min-width: 480px) {
-    width: 00px;
+    width: 280px;
   }
 
   @media screen and (min-width: 768px) {
-    width: 0px;
+    width: 618px;
+    padding-left: 75px;
+    padding-right: 75px;
   }
 
   @media screen and (min-width: 1024px) {
-    width: 00px;
+    width: 882px;
+    padding-left: 71px;
+    padding-right: 71px;
   }
 }
