@@ -12,7 +12,7 @@ const refs = {
 refs.openFooterModal.addEventListener('click', onOpenModal);
 
 function onOpenModal() {
-   
+   window.addEventListener('keydown', onEscClick);
     refs.lightboxFooterModal.classList.remove('visually-hidden');
 }
 
@@ -21,7 +21,7 @@ function onOpenModal() {
 refs.closeFooterModal.addEventListener('click', onCloseModal);
 
 function onCloseModal() {
-   window.removeEventListener('keydown', onEscClick); //для закрытия по ESС
+    window.removeEventListener('keydown', onEscClick);
     refs.lightboxFooterModal.classList.add('visually-hidden');
      
 }
@@ -30,13 +30,15 @@ function onCloseModal() {
 
 refs.backdropClick.addEventListener('click', onBackdropClick);
 
-function onBackdropClick() {
-    onCloseModal();
-
+function onBackdropClick(event) {
+    if (event.currentTarget === event.target) {
+        onCloseModal();
+    }
     console.log('кликнули по backdrop');
 }
 
 // ===========================закрыть по ESС==========================
+
 
 function onEscClick(event) {
     const ESC_KEY_CODE = 'Escape';
