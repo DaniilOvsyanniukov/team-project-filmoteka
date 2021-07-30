@@ -117,7 +117,38 @@ function clearInput(e) {
 }
 
 function renderMarkup(results) {
-  refs.gallery.insertAdjacentHTML('beforeend', movieMarkup(results));
+  const destrResults = destructArray(results)
+  refs.gallery.insertAdjacentHTML('beforeend', movieMarkup(destrResults));
+}
+
+function destructArray(arr) {
+  return arr.map(({ id, backdrop_path, original_title, poster_path, genre_ids, release_date }) => ({
+    id,
+    backdrop_path,
+    original_title,
+    poster_path,
+    genre_ids,
+    release_date,
+    dataMovie: JSON.stringify({
+      id,
+      backdrop_path,
+      original_title,
+      poster_path,
+      genre_ids,
+      release_date,
+    }),
+  }));
+};
+
+function destructObj({ id, backdrop_path, original_title, poster_path, genre_ids, release_date }) {
+  return { id, backdrop_path, original_title, poster_path, genre_ids, release_date, dataMovie: JSON.stringify({
+      id,
+      backdrop_path,
+      original_title,
+      poster_path,
+      genre_ids,
+      release_date,
+    }) }
 }
 
 function preloader() {

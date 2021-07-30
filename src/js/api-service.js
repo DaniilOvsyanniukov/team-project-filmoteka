@@ -26,19 +26,23 @@ export default class ApiServise {
       });
   }
 
-  fetchMovieDetails() {
-    const url = `${BASE_URL}/movie/${this.movieId}?api_key=${API_KEY}&language=en-US`;
+
+  fetchMovieDetails(movieId) {
+    const url = `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`;
     return fetch(url)
       .then(response => response.json())
       .then(data => {
-        // console.log(data)
+        console.log(data)
         return data;
-      });
-    // .then(data => ({
-    //   data
-    // })).then(({ data }) => {
-    //   return data
-    // })
+
+      })
+      // .then(data => ({
+      //   data
+      // })).then(({ data }) => {
+      //   console.log({data})
+      //   return data
+      // })
+
   }
 
   incrementPage() {
