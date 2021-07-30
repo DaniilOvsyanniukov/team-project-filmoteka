@@ -8,6 +8,7 @@ apiServise
   .fetchPopularMovies()
   .then(results => {
     renderMarkup(match(dectructArray(results)));
+    setTimeout(preloader, 200);
   })
   .catch(error => console.log(error));
 
@@ -96,11 +97,13 @@ function onSearchForm(e) {
 
   clearGallery();
   clearInput(e);
+  refs.preloader.classList.remove('done');
   apiServise.resetPage();
   apiServise
     .fetchMoviesByRequest()
     .then(results => {
       renderMarkup(match(dectructArray(results)));
+      setTimeout(preloader, 200);
     })
     .catch(error => console.log(error));
 }
@@ -115,4 +118,10 @@ function clearInput(e) {
 
 function renderMarkup(results) {
   refs.gallery.insertAdjacentHTML('beforeend', movieMarkup(results));
+}
+
+function preloader() {
+  if (!refs.preloader.classList.contains('done')) {
+    refs.preloader.classList.add('done');
+  }
 }
