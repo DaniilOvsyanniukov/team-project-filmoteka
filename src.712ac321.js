@@ -21,6 +21,6 @@ const e=document.querySelector(".watched"),t=document.querySelector(".queue"),a=
 },{"./refs":"VyiV","../templates/movie-card":"WSZA","./api-service":"hC31"}],"zUU9":[function(require,module,exports) {
 const o={openFooterModal:document.querySelector('[data-action="open-lightbox"]'),closeFooterModal:document.querySelector('[data-action="close-lightbox"]'),lightboxFooterModal:document.querySelector(".js-lightbox"),backdropClick:document.querySelector(".modal-background")};function e(){o.lightboxFooterModal.classList.remove("visually-hidden")}function t(){window.removeEventListener("keydown",l),o.lightboxFooterModal.classList.add("visually-hidden")}function c(){t(),console.log("кликнули по backdrop")}function l(o){console.log(o.code),"Escape"===o.code&&t()}o.openFooterModal.addEventListener("click",e),o.closeFooterModal.addEventListener("click",t),o.backdropClick.addEventListener("click",c);
 },{}],"Focm":[function(require,module,exports) {
-"use strict";require("./sass/main.scss"),require("./js/modalCard"),require("./js/localStorage"),require("./js/input.js"),require("./js//footer-modal.js");
-},{"./sass/main.scss":"clu1","./js/modalCard":"kE3q","./js/localStorage":"nnQC","./js/input.js":"vYOj","./js//footer-modal.js":"zUU9"}]},{},["Focm"], null)
-//# sourceMappingURL=/team-project-filmoteka/src.e5e49802.js.map
+"use strict";require("./sass/main.scss"),require("./js/modalCard"),require("./js/localStorage"),require("./js/input.js"),require("./js/footer-modal.js");
+},{"./sass/main.scss":"clu1","./js/modalCard":"kE3q","./js/localStorage":"nnQC","./js/input.js":"vYOj","./js/footer-modal.js":"zUU9"}]},{},["Focm"], null)
+//# sourceMappingURL=/team-project-filmoteka/src.712ac321.js.map
