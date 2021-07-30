@@ -26,14 +26,6 @@ export default class ApiServise {
       });
   }
 
-  fetchGenres() {
-    const url = `${BASE_URL}/genre/movie/list?api_key=${API_KEY}&language=en-US`;
-    return fetch(url)
-      .then(response => response.json())
-      .then(({ genres }) => {
-        return genres;
-      });
-  }
 
   fetchMovieDetails(movieId) {
     const url = `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`;
@@ -42,6 +34,7 @@ export default class ApiServise {
       .then(data => {
         console.log(data)
         return data;
+
       })
       // .then(data => ({
       //   data
@@ -49,6 +42,7 @@ export default class ApiServise {
       //   console.log({data})
       //   return data
       // })
+
   }
 
   incrementPage() {
