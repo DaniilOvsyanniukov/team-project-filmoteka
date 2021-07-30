@@ -2,8 +2,10 @@ import movieMarkup from '../templates/library-movie-card.hbs';
 
 const libraryLink = document.querySelector('.library-js');
 const listOfHeaderBtns = document.querySelector('.buttons.list');
-const gallery = document.querySelector('.gallery-js');
+const gallery = document.querySelector('.movie-list-js');
 const titleNoMovie = document.querySelector('.no-movie');
+
+console.log(gallery);
 
 libraryLink.addEventListener('click', onLibraryLinkCLick);
 listOfHeaderBtns.addEventListener('click', onListOfHeadersBtns);
