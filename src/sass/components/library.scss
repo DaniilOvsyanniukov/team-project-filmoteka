@@ -1,0 +1,14 @@
+.galleryEmptySpace {
+  height: 100vh;
+  background-image: url('../images/library/noMovies.png');
+  background-repeat: no-repeat;
+  opacity: 0.4;
+  background-size: initial;
+  background-position-x: center;
+}
+.no-movie {
+  font-size: 50px;
+  color: grey;
+  opacity: 0.4;
+  text-align: center;
+}
