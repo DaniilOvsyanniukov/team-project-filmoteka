@@ -5,7 +5,7 @@ import movieDetails from '../templates/modal-movie-card.hbs';
 
 const apiService = new ApiService();
 
-// console.log(apiService.fetchMovieDetails(456934))
+console.log(apiService.fetchMovieDetails(522931))
 
 const refs = {
   backdrop: document.querySelector('.backdrop'),
@@ -34,14 +34,13 @@ function onCollection(e) {
   window.addEventListener('keyup', onKeyClose);
 }
 
-// function destructObj({ id, title, backdrop_path, original_title, poster_path, genre_ids, release_date, vote_average, vote_count, popularity, genres }) {
-//   return { id, title, backdrop_path, original_title, poster_path, genre_ids, release_date, vote_average, vote_count, popularity, genres, dataMovie: JSON.stringify({
+// function destructObj({ id, title, overview, backdrop_path, original_title, poster_path, release_date, vote_average, vote_count, popularity, genres }) {
+//   return { id, title, overview, backdrop_path, original_title, poster_path, release_date, vote_average, vote_count, popularity, genres, dataMovie: JSON.stringify({
 //       id,
 //       title,
 //       backdrop_path,
 //       original_title,
 //       poster_path,
-//       genre_ids,
 //       release_date,
 //       vote_average,
 //       vote_count,
@@ -52,6 +51,7 @@ function onCollection(e) {
 
 function appendInModalCard(data) {
   // const destrData = destructObj(data)
+  // console.log(destrData)
   refs.movieCardContainer.insertAdjacentHTML('beforeend', movieDetails(data));
 }
 
