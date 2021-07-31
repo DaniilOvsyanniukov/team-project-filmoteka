@@ -1,18 +1,16 @@
 import ApiService from './api-service';
 import galRefs from './refs';
 
-
 import movieDetails from '../templates/modal-movie-card.hbs';
 
 const apiService = new ApiService();
 
-console.log(apiService.fetchMovieDetails(456934))
+console.log(apiService.fetchMovieDetails(522931))
 
 const refs = {
-    backdrop: document.querySelector('.backdrop'),
-    movieCardContainer: document.querySelector('.modal-card-container'),
-    closeBtn: document.querySelector('.close-btn'),
-    
+  backdrop: document.querySelector('.backdrop'),
+  movieCardContainer: document.querySelector('.modal-card-container'),
+  closeBtn: document.querySelector('.close-btn'),
 };
 
 galRefs.gallery.addEventListener('click', onCollection);
@@ -20,30 +18,29 @@ refs.closeBtn.addEventListener('click', onCloseBtn);
 refs.backdrop.addEventListener('click', onBackdrop);
 
 function onCollection(e) {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (e.target.tagName.toLowerCase() !== 'img') {
-        return;
-    };
+  if (e.target.tagName.toLowerCase() !== 'img') {
+    return;
+  }
 
-    apiService.fetchMovieDetails(e.target.dataset.action).then(data => {
-        clearModalMovieCardContainer()
-        appendInModalCard(data);
-    });
-    
-    refs.backdrop.classList.remove('is-hidden');
+  apiService.fetchMovieDetails(e.target.dataset.action).then(data => {
+    clearModalMovieCardContainer();
+    appendInModalCard(data);
+  });
 
-    window.addEventListener('keyup', onKeyClose);
+  refs.backdrop.classList.remove('is-hidden');
+
+  window.addEventListener('keyup', onKeyClose);
 }
 
-// function destructObj({ id, title, backdrop_path, original_title, poster_path, genre_ids, release_date, vote_average, vote_count, popularity, genres }) {
-//   return { id, title, backdrop_path, original_title, poster_path, genre_ids, release_date, vote_average, vote_count, popularity, genres, dataMovie: JSON.stringify({
+// function destructObj({ id, title, overview, backdrop_path, original_title, poster_path, release_date, vote_average, vote_count, popularity, genres }) {
+//   return { id, title, overview, backdrop_path, original_title, poster_path, release_date, vote_average, vote_count, popularity, genres, dataMovie: JSON.stringify({
 //       id,
 //       title,
 //       backdrop_path,
 //       original_title,
 //       poster_path,
-//       genre_ids,
 //       release_date,
 //       vote_average,
 //       vote_count,
@@ -52,30 +49,30 @@ function onCollection(e) {
 //     }) }
 // }
 
-
 function appendInModalCard(data) {
-    // const destrData = destructObj(data)
-    refs.movieCardContainer.insertAdjacentHTML('beforeend', movieDetails(data))
+  // const destrData = destructObj(data)
+  // console.log(destrData)
+  refs.movieCardContainer.insertAdjacentHTML('beforeend', movieDetails(data));
 }
 
 function clearModalMovieCardContainer() {
-    refs.movieCardContainer.innerHTML = ''
+  refs.movieCardContainer.innerHTML = '';
 }
 
 function onCloseBtn(e) {
-    refs.backdrop.classList.add('is-hidden');
+  refs.backdrop.classList.add('is-hidden');
 
-    window.removeEventListener('keyup', onKeyClose)
+  window.removeEventListener('keyup', onKeyClose);
 }
 
 function onBackdrop(e) {
-    if (e.target === e.currentTarget) {
-        onCloseBtn();
-    }
+  if (e.target === e.currentTarget) {
+    onCloseBtn();
+  }
 }
 
 function onKeyClose(e) {
-    if (e.code === 'Escape') {
-        onCloseBtn()
-    }
+  if (e.code === 'Escape') {
+    onCloseBtn();
+  }
 }

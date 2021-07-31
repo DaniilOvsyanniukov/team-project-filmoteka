@@ -4,23 +4,37 @@ import ApiServise from './api-service';
 
 const apiServise = new ApiServise();
 
-// let GENRES = [];
-// apiServise.fetchGenres().then(arr => {
-//   console.log(arr);
-// });
-// console.log(GENRES);
-
 apiServise
   .fetchPopularMovies()
   .then(results => {
-    renderMarkup(match(results));
-    // console.log(results);
+    renderMarkup(match(dectructArray(results)));
+    setTimeout(preloader, 200);
   })
   .catch(error => console.log(error));
 
 refs.searchForm.addEventListener('submit', onSearchForm);
 
+function dectructArray(arr) {
+  return arr.map(({ id, backdrop_path, original_title, genre_ids, poster_path, release_date }) => ({
+    id,
+    backdrop_path,
+    original_title,
+    genre_ids,
+    poster_path,
+    release_date,
+    dataMovie: JSON.stringify({
+      id,
+      backdrop_path,
+      original_title,
+      genre_ids,
+      poster_path,
+      release_date,
+    }),
+  }));
+}
+
 function match(arr) {
+  const IMG_PATH = 'https://image.tmdb.org/t/p/original/';
   return arr.map(el => {
     for (let i = 0; i < el.genre_ids.length; i++) {
       el.genre_ids[i] = findGenre(el.genre_ids[i]);
@@ -28,8 +42,14 @@ function match(arr) {
         el.genre_ids.splice(2, 5, 'other');
       }
     }
-    // el.release_date = el.release_date.slice(0, 4);
-    // console.log(el.genre_ids);
+    if (el.release_date) {
+      el.release_date = el.release_date.slice(0, 4);
+    }
+    if (el.poster_path) {
+      el.poster_path = IMG_PATH + el.poster_path;
+    } else {
+      el.poster_path = 'https://w.zhinka.tv/templates/Default/dleimages/no_image.jpg';
+    }
     return el;
   });
 }
@@ -77,11 +97,13 @@ function onSearchForm(e) {
 
   clearGallery();
   clearInput(e);
+  refs.preloader.classList.remove('done');
   apiServise.resetPage();
   apiServise
     .fetchMoviesByRequest()
     .then(results => {
-      renderMarkup(match(results));
+      renderMarkup(match(dectructArray(results)));
+      setTimeout(preloader, 200);
     })
     .catch(error => console.log(error));
 }
@@ -127,4 +149,10 @@ function destructObj({ id, backdrop_path, original_title, poster_path, genre_ids
       genre_ids,
       release_date,
     }) }
+}
+
+function preloader() {
+  if (!refs.preloader.classList.contains('done')) {
+    refs.preloader.classList.add('done');
+  }
 }

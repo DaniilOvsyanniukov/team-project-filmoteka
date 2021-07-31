@@ -1,25 +1,25 @@
-<header class="header" id="Home">
+<header class="header header-home" id="Home">
     <div class="container">
         <nav class="nav">
             <a href="./index.html" class="main-page-link">
-                <svg class="header-logo">
+                <svg class="header-logo" width="24" height="24">
                     <use href="./images/sprite.svg#icon-film"></use>
                 </svg>
-                Filmoteka
+                <span class="site-title">Filmoteka</span>
             </a>
 
             <ul class="nav-list list">
                 <li class="nav-list-item">
                     <a href="" class="nav-list-link current-page">Home<a>
                 </li>
-                <li class="nav-list-item">
-                    <a href="" class="nav-list-link">My library</a>
+                <li class="nav-list-item ">
+                    <a href="" class="nav-list-link library-js">My library</a>
                 </li>
             </ul>
         </nav>
 
-        <span class="input-wrapper">
-            <form action="" class="search-form">
+        <!-- <span class="input-wrapper"> -->
+            <form action="" class="search-form ">
                 <input class="search-form-input" 
                     type="text" 
                     name="query" 
@@ -29,15 +29,15 @@
                     <use href="./images/sprite.svg#icon-search"></use>
                 </svg>
             </form>
-        </span>
+        <!-- </span> -->
         
 
         <ul class="buttons list visually-hidden">
             <li class="buttons-item">
-                <button type="button" class="library-btn enabled-btn">Watched</button>
+                <button type="button" class="library-btn enabled-btn watched-js">Watched</button>
             </li>
             <li class="buttons-item">
-                <button type="button" class="library-btn disabled-btn">Queue</button>
+                <button type="button" class="library-btn disabled-btn queue-js">Queue</button>
             </li>
         </ul>
 

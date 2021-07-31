@@ -36,22 +36,16 @@
     <div class="btn-container">
 
         <button type='button' 
-        class="watched" 
-        data-id={{id}}
-        data-backdrop={{backdrop_path}}
-        data-title={{original_title}}
-        data-poster={{poster_path}}
-        data-genre={{genre_ids}}
-        data-release={{release_date}}>Add to watched</button>
+        class="watched"
+        data-dir="watched"
+        data-id={{id}}>Add to watched</button>
+
+
         
         <button type='button' 
         class="queue" 
-        data-id={{id}}
-        data-backdrop={{backdrop_path}}
-        data-title={{original_title}}
-        data-poster={{poster_path}}
-        data-genre={{genre_ids}}
-        data-release={{release_date}}>Add to queue</button>
+        data-source="queue"
+        data-id={{id}}>Add to queue</button>
 
     </div>
     
