@@ -6,6 +6,9 @@
   top: 0;
   left: 0;
   z-index: 1;
+
+  // animation: appear 0.5s forwards;
+  //animation: zoomIn 0.5s 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 }
 
 .modal-background {
@@ -14,6 +17,20 @@
   text-align: center;
   vertical-align: middle;
   width: 100%;
+
+  // transition: all 2500ms cubic-bezier(0.4, 0, 0.2, 1);
+  // transform: scale(1.15);
+  // animation: zoomIn 0.5s 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+
+  animation-name: zoom;
+  @keyframes zoom {
+    from {
+      transform: scale(0.1);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
 }
 
 .lightbox__content {
@@ -43,8 +60,8 @@
   @media screen and (min-width: 1024px) {
     width: 900px;
     height: 700px;
-    padding-left: 25px;
-    padding-right: 25px;
+    padding-left: 45px;
+    padding-right: 45px;
   }
 }
 //======================title======================
@@ -59,8 +76,6 @@
   color: var(--button-and-text-orange);
 
   padding-top: 15px;
-  //box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14),
-  // 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }
 
 //======================image-team======================

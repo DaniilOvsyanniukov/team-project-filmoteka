@@ -12,8 +12,8 @@ const refs = {
 refs.openFooterModal.addEventListener('click', onOpenModal);
 
 function onOpenModal() {
-   window.addEventListener('keydown', onEscClick);
-    refs.lightboxFooterModal.classList.remove('visually-hidden');
+   window.addEventListener('keydown', onEscClick); //для Esc
+    refs.lightboxFooterModal.classList.remove('visually-hidden');   
 }
 
 //========================закрыть модалку через иконку ========================================
@@ -21,9 +21,8 @@ function onOpenModal() {
 refs.closeFooterModal.addEventListener('click', onCloseModal);
 
 function onCloseModal() {
-    window.removeEventListener('keydown', onEscClick);
+    window.removeEventListener('keydown', onEscClick); //для Esc
     refs.lightboxFooterModal.classList.add('visually-hidden');
-     
 }
 
 // ==============================закрыть по backdrop====================
@@ -38,7 +37,6 @@ function onBackdropClick(event) {
 }
 
 // ===========================закрыть по ESС==========================
-
 
 function onEscClick(event) {
     const ESC_KEY_CODE = 'Escape';
