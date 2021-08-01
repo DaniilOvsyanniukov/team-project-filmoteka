@@ -13,6 +13,8 @@
 @import './base/container';
 @import './components/header';
 
+@import './components/library-style';
+
 @import './components/footer';
 
 @import './components/backdrop';
@@ -23,3 +25,5 @@
 
 @import './utils/variables';
 @import './utils/visualy-hidden';
+
+@import './components/pagination';
