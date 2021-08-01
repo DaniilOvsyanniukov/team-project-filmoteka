@@ -7,43 +7,36 @@ const apiServise = new ApiServise();
 apiServise
   .fetchPopularMovies()
   .then(results => {
-    renderMarkup(match(dectructArray(results)));
+    renderMarkup(match(destructArray(results)));
     setTimeout(preloader, 200);
   })
   .catch(error => console.log(error));
 
 refs.searchForm.addEventListener('submit', onSearchForm);
 
-function dectructArray(arr) {
-  return arr.map(({ id, backdrop_path, original_title, genre_ids, poster_path, release_date }) => ({
-    id,
-    backdrop_path,
-    original_title,
-    genre_ids,
-    poster_path,
-    release_date,
-    dataMovie: JSON.stringify({
-      id,
-      backdrop_path,
-      original_title,
-      genre_ids,
-      poster_path,
-      release_date,
-    }),
-  }));
-}
-
 function match(arr) {
   const IMG_PATH = 'https://image.tmdb.org/t/p/original/';
   return arr.map(el => {
     for (let i = 0; i < el.genre_ids.length; i++) {
-      el.genre_ids[i] = findGenre(el.genre_ids[i]);
-      if (el.genre_ids.length > 2) {
-        el.genre_ids.splice(2, 5, 'other');
+      if (findGenre(el.genre_ids[i])) {
+        el.genre_ids[i] = ` ${findGenre(el.genre_ids[i])}`;
+        if (el.genre_ids.length > 2) {
+          el.genre_ids.splice(2, 5, ' Other');
+        }
+      } else {
+        el.genre_ids[i] = ' Other genre';
+        if (el.genre_ids.length > 2) {
+          el.genre_ids.splice(2, 5, ' Other');
+        }
       }
     }
     if (el.release_date) {
       el.release_date = el.release_date.slice(0, 4);
+    } else if (el.first_air_date) {
+      el.release_date = el.first_air_date.slice(0, 4);
+    }
+    if (!el.original_title) {
+      el.original_title = el.name;
     }
     if (el.poster_path) {
       el.poster_path = IMG_PATH + el.poster_path;
@@ -102,7 +95,7 @@ function onSearchForm(e) {
   apiServise
     .fetchMoviesByRequest()
     .then(results => {
-      renderMarkup(match(dectructArray(results)));
+      renderMarkup(match(destructArray(results)));
       setTimeout(preloader, 200);
     })
     .catch(error => console.log(error));
@@ -117,12 +110,46 @@ function clearInput(e) {
 }
 
 function renderMarkup(results) {
-  const destrResults = destructArray(results)
+  const destrResults = destructArray(results);
   refs.gallery.insertAdjacentHTML('beforeend', movieMarkup(destrResults));
 }
 
 function destructArray(arr) {
-  return arr.map(({ id, backdrop_path, original_title, poster_path, genre_ids, release_date }) => ({
+  return arr.map(
+    ({
+      first_air_date,
+      id,
+      name,
+      backdrop_path,
+      original_title,
+      genre_ids,
+      poster_path,
+      release_date,
+    }) => ({
+      first_air_date,
+      id,
+      name,
+      backdrop_path,
+      original_title,
+      genre_ids,
+      poster_path,
+      release_date,
+      dataMovie: JSON.stringify({
+        first_air_date,
+        id,
+        name,
+        backdrop_path,
+        original_title,
+        genre_ids,
+        poster_path,
+        release_date,
+      }),
+    }),
+  );
+}
+
+function destructObj({ id, backdrop_path, original_title, poster_path, genre_ids, release_date }) {
+  return {
     id,
     backdrop_path,
     original_title,
@@ -137,18 +164,7 @@ function destructArray(arr) {
       genre_ids,
       release_date,
     }),
-  }));
-};
-
-function destructObj({ id, backdrop_path, original_title, poster_path, genre_ids, release_date }) {
-  return { id, backdrop_path, original_title, poster_path, genre_ids, release_date, dataMovie: JSON.stringify({
-      id,
-      backdrop_path,
-      original_title,
-      poster_path,
-      genre_ids,
-      release_date,
-    }) }
+  };
 }
 
 function preloader() {
