@@ -31,4 +31,4 @@ const o={openFooterModal:document.querySelector('[data-action="open-lightbox"]')
 },{"./refs":"VyiV"}],"Focm":[function(require,module,exports) {
 "use strict";require("./sass/main.scss"),require("./js/header.js"),require("./js/modalCard"),require("./js/localStorage"),require("./js/input.js"),require("./js/footer-modal.js"),require("./js/library.js"),require("./js/pagination.js");
 },{"./sass/main.scss":"clu1","./js/header.js":"cGsR","./js/modalCard":"kE3q","./js/localStorage":"nnQC","./js/input.js":"vYOj","./js/footer-modal.js":"zUU9","./js/library.js":"BfNj","./js/pagination.js":"o8lo"}]},{},["Focm"], null)
-//# sourceMappingURL=/team-project-filmoteka/src.a9672476.js.map
+//# sourceMappingURL=/team-project-filmoteka/src.a73beb24.js.map
