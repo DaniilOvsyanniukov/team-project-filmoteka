@@ -266,6 +266,7 @@ svg rect {
 
 .nav-list-link:hover, .nav-list-link:focus {
   color: var(--button-and-text-orange);
+  cursor: pointer;
 }
 
 .search-form {
@@ -551,11 +552,15 @@ html {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  z-index: 3;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  z-index: 1;
   right: 30px;
   bottom: 20px;
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   border: none;
   border-radius: 25%;
   -webkit-box-pack: center;
@@ -734,7 +739,7 @@ html {
   width: 100%;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 2;
 }
 
 .modal-background {
@@ -743,30 +748,10 @@ html {
   text-align: center;
   vertical-align: middle;
   width: 100%;
-  -webkit-animation-name: zoom;
-          animation-name: zoom;
-}
-
-@-webkit-keyframes zoom {
-  from {
-    -webkit-transform: scale(0.1);
-            transform: scale(0.1);
-  }
-  to {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-}
-
-@keyframes zoom {
-  from {
-    -webkit-transform: scale(0.1);
-            transform: scale(0.1);
-  }
-  to {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  -webkit-transition: opacity 2500ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 2500ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .lightbox__content {
@@ -776,8 +761,11 @@ html {
   display: inline-block;
   height: 100vh;
   border-radius: 4px;
-  position: relative;
-  overflow-y: scroll;
+  overflow-y: auto;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transition: opacity 2500ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 2500ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @media screen and (max-width: 479px) {
@@ -803,15 +791,14 @@ html {
 
 @media screen and (min-width: 1024px) {
   .lightbox__content {
-    width: 900px;
-    height: 700px;
+    width: 950px;
+    height: 640px;
     padding-left: 45px;
     padding-right: 45px;
   }
 }
 
 .modal-title {
-  position: relative;
   font-weight: 500;
   font-size: 30px;
   line-height: 16px;
@@ -868,7 +855,7 @@ html {
 .team-name {
   font-style: normal;
   font-weight: 500;
-  font-size: 23px;
+  font-size: 22px;
   line-height: 35px;
   margin-bottom: 5px;
   color: var(--footer-color-text);
@@ -929,12 +916,12 @@ html {
 }
 
 .button-close {
-  position: absolute;
+  position: fixed;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  top: 8px;
-  right: 8px;
+  top: 18px;
+  right: calc(50% - 157.5px);
   width: 35px;
   height: 35px;
   border-radius: 50%;
@@ -958,6 +945,31 @@ html {
   background-repeat: no-repeat;
 }
 
+@media screen and (max-width: 479px) {
+  .button-close {
+    right: calc(50% - 165px);
+  }
+}
+
+@media screen and (min-width: 480px) {
+  .button-close {
+    right: calc(50% - 180px);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .button-close {
+    right: calc(50% - 300px);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .button-close {
+    top: 30px;
+    right: calc(50% - 485px);
+  }
+}
+
 .button-close:hover, .button-close:focus {
   background-color: rgba(233, 101, 24, 0.5);
   fill: var(--white);
@@ -977,6 +989,18 @@ html {
   color: grey;
   opacity: 0.4;
   text-align: center;
+}
+
+.library-genre-reset-left {
+  margin-left: 0;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  color: var(--header-line-and-numbers);
+}
+
+.vote-average.library-genre-reset-left {
+  color: #ffffff;
 }
 
 *,
@@ -1010,5 +1034,57 @@ html {
   height: 1px !important;
   width: 1px !important;
   overflow: hidden;
+}
+
+.display-none {
+  display: none;
+}
+
+.pages {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.pagination {
+  width: 100%;
+  height: 44px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 30px auto 30px;
+  padding: 0 15px;
+  max-width: 1280px;
+}
+
+.pagination-left, .pagination-right {
+  width: 20%;
+}
+
+.pagination-left {
+  float: left;
+}
+
+.pagination-right {
+  float: right;
+}
+
+.active {
+  background-color: #ce1b1b;
+}
+
+.pagination-mid {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 /*# sourceMappingURL=main.css.map */
