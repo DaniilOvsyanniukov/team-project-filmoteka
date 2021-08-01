@@ -1,5 +1,7 @@
 import './sass/main.scss';
 
+
+import './js/header.js';
 // Eugen(modal)
 import './js/modalCard';
 import './js/localStorage';
@@ -11,4 +13,6 @@ import './js/footer-modal.js';
 //Anton Tymchenko
 import './js/library.js';
 
+//Igor
 import './js/pagination.js'
+
