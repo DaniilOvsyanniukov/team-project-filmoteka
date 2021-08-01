@@ -5,7 +5,7 @@ import movieDetails from '../templates/modal-movie-card.hbs';
 
 const apiService = new ApiService();
 
-console.log(apiService.fetchMovieDetails(522931))
+// console.log(apiService.fetchMovieDetails(522931))
 
 const refs = {
   backdrop: document.querySelector('.backdrop'),

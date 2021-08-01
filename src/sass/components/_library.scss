@@ -12,3 +12,15 @@
   opacity: 0.4;
   text-align: center;
 }
+
+.library-genre-reset-left {
+  margin-left: 0;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  color: var(--header-line-and-numbers);
+}
+
+.vote-average.library-genre-reset-left {
+  color: #ffffff;
+}
