@@ -10,14 +10,8 @@ const homePageLink = document.querySelector('.home-js');
 const header = document.querySelector('.header-js');
 //
 
-console.log(gallery);
-
 libraryLink.addEventListener('click', onLibraryLinkCLick);
 listOfHeaderBtns.addEventListener('click', onListOfHeadersBtns);
-//yarik
-watchedBtn.addEventListener('click', onWatchedBtnClick);
-queueBtn.addEventListener('click', onQueueBtnClick);
-//
 
 function onLibraryLinkCLick(event) {
   event.preventDefault();
@@ -30,36 +24,53 @@ function onLibraryLinkCLick(event) {
   header.classList.remove('header-home');
   header.classList.add('header-library');
   //
-  renderMarkupFromLocalStorage('watched');
-  widthForGallery();
+  renderMarkupFromLocalStorage('watched movies');
+  heightForGalleryBackgroundImg();
 }
-
 
 function onListOfHeadersBtns(event) {
   event.preventDefault();
-  if (event.target.classList.contains('watched-js')) {  
-    renderMarkupFromLocalStorage('watched');
-    widthForGallery();
+  if (event.target.classList.contains('watched-js')) {
+    renderMarkupFromLocalStorage('watched movies');
+    heightForGalleryBackgroundImg();
   }
   if (event.target.classList.contains('queue-js')) {
-    renderMarkupFromLocalStorage('queue');
-    widthForGallery();
+    renderMarkupFromLocalStorage('In queue');
+    heightForGalleryBackgroundImg();
   }
 }
 
 function renderMarkupFromLocalStorage(key) {
   gallery.innerHTML = '';
   const moviesFromLocalStorage = JSON.parse(localStorage.getItem(key));
-  gallery.insertAdjacentHTML('beforeend', movieMarkup(moviesFromLocalStorage));
+  const updateInfoFroLocalStarage = sliceGanresDate(moviesFromLocalStorage);
+  console.log(updateInfoFroLocalStarage);
+  gallery.insertAdjacentHTML('beforeend', movieMarkup(updateInfoFroLocalStarage));
 }
 
-function widthForGallery() {
+function heightForGalleryBackgroundImg() {
   const arrOfCards = gallery.querySelectorAll('.movie-card-js');
   if (arrOfCards.length === 0) {
     gallery.classList.add('galleryEmptySpace');
-    titleNoMovie.classList.remove('visually-hidden');
+    titleNoMovie.classList.remove('display-none');
   } else {
     gallery.classList.remove('galleryEmptySpace');
-    titleNoMovie.classList.add('visually-hidden');
+    titleNoMovie.classList.add('display-none');
   }
+}
+
+function sliceGanresDate(arr) {
+  if (arr === null) {
+    return;
+  }
+  return arr.map(item => {
+    if (item.genres.length > 2) {
+      item.genres.splice(2, 5);
+      item.genres.splice(1, 0, { name: `, ` });
+    }
+    if (item.release_date) {
+      item.release_date = item.release_date.slice(0, 4);
+    }
+    return item;
+  });
 }
