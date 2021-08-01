@@ -89,16 +89,32 @@
 
   margin-bottom: 41px;
 }
+.header-logo {
+  transition: transform var(--animation-duration) var(--timing-function),
+    stroke var(--animation-duration) var(--timing-function);
+  // &:hover {
+  //   transform: rotate(360deg);
+  // }
+}
 
 .main-page-link {
   font-weight: 500;
   font-size: 30px;
   line-height: 1.667;
   color: white;
+  stroke: #818181;
+  transition: color var(--animation-duration) var(--timing-function);
 
   &:hover,
   &:focus {
-    color: var(--button-and-text-orange);
+    color: var(--header-line-and-numbers);
+    stroke: var(--header-focus);
+    outline: none;
+  }
+
+  &:hover .header-logo,
+  &:focus .header-logo {
+    transform: rotate(360deg);
   }
 }
 
@@ -118,11 +134,13 @@
   text-transform: uppercase;
   color: white;
   line-height: 1.667;
+  transition: color var(--animation-duration) var(--timing-function);
 
   &:hover,
   &:focus {
-    color: var(--button-and-text-orange);
+    color: var(--header-line-and-numbers);
     cursor: pointer;
+    outline: none;
   }
 }
 
@@ -146,18 +164,76 @@
   outline: none;
   border-bottom: 0.5px solid white;
   color: white;
+  transition: border-width var(--animation-duration) var(--timing-function),
+    border-color var(--animation-duration) var(--timing-function);
+
+  &:hover,
+  &:focus {
+    border-bottom: 3px solid var(--button-and-text-orange);
+  }
+}
+
+.search-input-icon {
+  stroke: white;
+  position: absolute;
+  top: 0%;
+  right: 0;
+  transition: stroke var(--animation-duration) var(--timing-function),
+    transform var(--animation-duration) var(--timing-function);
+}
+
+.search-form-input:hover + .search-input-icon {
+  stroke: var(--header-focus);
+  transform: scale(1.5);
+}
+
+.search-form-input:focus + .search-input-icon {
+  stroke: var(--header-focus);
+  transform: scale(1.5);
 }
 
 ::placeholder {
   opacity: 1;
   color: white;
 }
-
-.search-input-icon {
-  position: absolute;
-  top: 0%;
-  right: 0;
+.search-form:hover ::placeholder {
+  opacity: 0.5;
 }
+
+// --- добавление прозрачности плейсхолдера при фокусе на всех браузерах --- //
+::-webkit-input-placeholder {
+  opacity: 1;
+  transition: opacity var(--animation-duration) var(--timing-function);
+}
+::-moz-placeholder {
+  opacity: 1;
+  transition: opacity var(--animation-duration) var(--timing-function);
+}
+:-moz-placeholder {
+  opacity: 1;
+  transition: opacity var(--animation-duration) var(--timing-function);
+}
+:-ms-input-placeholder {
+  opacity: 1;
+  transition: opacity var(--animation-duration) var(--timing-function);
+}
+:focus::-webkit-input-placeholder {
+  opacity: 0;
+  transition: opacity var(--animation-duration) var(--timing-function);
+}
+:focus::-moz-placeholder {
+  opacity: 0;
+  transition: opacity var(--animation-duration) var(--timing-function);
+}
+:focus:-moz-placeholder {
+  opacity: 0;
+  transition: opacity var(--animation-duration) var(--timing-function);
+}
+:focus:-ms-input-placeholder {
+  opacity: 0;
+  transition: opacity var(--animation-duration) var(--timing-function);
+}
+//
 
 //----------- library PAGE -----------//
 
@@ -189,20 +265,22 @@
   padding: 14px 38px;
   outline: none;
   border: none;
-
   cursor: pointer;
-
   color: white;
 }
 
 .enabled-btn {
   background-color: var(--button-and-text-orange);
   border: 1px solid var(--button-and-text-orange);
+  transition: background-color var(--animation-duration) var(--timing-function),
+    border var(--animation-duration) var(--timing-function);
 }
 
 .disabled-btn {
   background-color: transparent;
   border: 1px solid white;
+  transition: background-color var(--animation-duration) var(--timing-function),
+    border var(--animation-duration) var(--timing-function);
 }
 
 //-------- ADAPTATION -------//
