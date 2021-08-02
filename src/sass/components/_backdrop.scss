@@ -6,6 +6,7 @@
   height: 100%;
   background-color: var(--backdrop-color);
   transition: all var(--timing-function) var(--animation-duration);
+  z-index: 1000; //для анимации карточек
 }
 
 .is-hidden {
