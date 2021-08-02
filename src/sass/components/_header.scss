@@ -136,8 +136,7 @@
   line-height: 1.667;
   transition: color var(--animation-duration) var(--timing-function);
 
-  &:hover,
-  &:focus {
+  &:hover {
     color: var(--header-line-and-numbers);
     cursor: pointer;
     outline: none;
