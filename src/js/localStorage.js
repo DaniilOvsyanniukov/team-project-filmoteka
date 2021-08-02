@@ -14,8 +14,6 @@ modal.addEventListener('click', onModalButtons);
 function onModalButtons(e) {
   e.preventDefault();
 
-  console.log(e.target.tagName);
-
   const id = JSON.parse(e.target.dataset.id);
   const repeatedIndexWatched = watchedList.findIndex(elem => elem.id === id);
   const repeatedIndexQueue = queueList.findIndex(elem => elem.id === id);
