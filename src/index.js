@@ -13,6 +13,5 @@ import './js/footer-modal.js';
 //Anton Tymchenko
 import './js/library.js';
 
-//Igor
-// import './js/pagination.js'
+
 
