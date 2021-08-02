@@ -1,13 +1,23 @@
 html {
   scroll-behavior: smooth;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+
+  // Растягиваем body по высоте html
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 }
 
 .footer {
-  position: relative;
+  display: flex;
   background-color: var(--pagination-and-footer-background);
-  position: relative;
+
   left: 0px;
-  bottom: 1px;
+  bottom: 0px;
   height: 100px;
   width: 100%;
 
