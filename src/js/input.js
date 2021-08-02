@@ -4,13 +4,27 @@ import ApiServise from './api-service';
 
 const apiServise = new ApiServise();
 
-apiServise
-  .fetchPopularMovies()
-  .then(results => {
-    renderMarkup(match(destructArray(results)));
-    setTimeout(preloader, 200);
-  })
-  .catch(error => console.log(error));
+let currentPage = 1;
+let totalPages;
+const pageRange = 2;
+
+const paginationList = document.querySelector('.pagination-mid');
+const pageList = document.querySelector('.pages');
+const lastBtn = document.getElementById('last-page');
+const prevBtn = document.getElementById('button-prev');
+const nextBtn = document.getElementById('button-next');
+const firstPage = document.querySelector('.first');
+const lastPage = document.querySelector('.last');
+
+init()
+
+// apiServise
+//   .fetchPopularMovies()
+//   .then(results => {
+//     renderMarkup(match(destructArray(results)));
+//     setTimeout(preloader, 200);
+//   })
+//   .catch(error => console.log(error));
 
 refs.searchForm.addEventListener('submit', onSearchForm);
 
@@ -80,6 +94,27 @@ function findGenre(el) {
   return result;
 }
 
+// function onSearchForm(e) {
+//   e.preventDefault();
+//   apiServise.query = e.currentTarget.elements.query.value;
+
+//   if (apiServise.query.trim() === '') {
+//     return alert('Пожалуйста, введите ваш запрос');
+//   }
+
+//   clearGallery();
+//   clearInput(e);
+//   refs.preloader.classList.remove('done');
+//   apiServise.resetPage();
+//   apiServise
+//     .fetchMoviesByRequest()
+//     .then(results => {
+//       renderMarkup(match(destructArray(results)));
+//       setTimeout(preloader, 200);
+//     })
+//     .catch(error => console.log(error));
+// }
+
 function onSearchForm(e) {
   e.preventDefault();
   apiServise.query = e.currentTarget.elements.query.value;
@@ -90,15 +125,12 @@ function onSearchForm(e) {
 
   clearGallery();
   clearInput(e);
+  pageList.innerHTML = '';
+  
   refs.preloader.classList.remove('done');
   apiServise.resetPage();
-  apiServise
-    .fetchMoviesByRequest()
-    .then(results => {
-      renderMarkup(match(destructArray(results)));
-      setTimeout(preloader, 200);
-    })
-    .catch(error => console.log(error));
+  currentPage = 1;
+  searchFetch()
 }
 
 function clearGallery() {
@@ -172,3 +204,152 @@ function preloader() {
     refs.preloader.classList.add('done');
   }
 }
+
+//                                Код пагинации
+
+function searchFetch() {
+  apiServise
+    .fetchMoviesByRequest()
+    .then(data => {
+      totalPages = data.total_pages;
+      lastBtn.textContent = totalPages;
+      // console.log(data)
+      init()
+      return data.results;
+    }).then(results => {
+      renderMarkup(match(destructArray(results)));
+      setTimeout(preloader, 200);
+    })
+    
+    .catch(error => console.log(error));
+}
+
+function fetchGall() {
+    apiServise
+    .fetchPopularMovies()
+    .then(data => {
+      totalPages = data.total_pages;
+      lastBtn.textContent = totalPages;
+      // console.log(data)
+      init()
+      return data.results;
+    }).then(results => {
+      renderMarkup(match(destructArray(results)));
+    setTimeout(preloader, 200);
+    })
+    
+  .catch(error => console.log(error));
+}
+
+
+paginationList.addEventListener('click', onBtnClick);
+prevBtn.addEventListener('click', onPrevBtnClick);
+nextBtn.addEventListener('click', onNextBtnClick);
+
+function onBtnClick(evt) {
+    evt.preventDefault();
+
+  if (evt.target.nodeName !== 'BUTTON') {
+    return;
+  }
+  
+  refs.gallery.innerHTML = '';
+  pageList.innerHTML = '';
+  
+  currentPage =  Number (evt.target.textContent)
+  apiServise.pagination(currentPage);
+  
+  if (apiServise.query) {
+    searchFetch()
+  } else {
+    fetchGall()
+  }
+  
+}
+
+function onPrevBtnClick(evt) {
+    evt.preventDefault();
+    
+  if (currentPage > 1) {
+    currentPage -= 1
+  }
+  refs.gallery.innerHTML = '';
+  pageList.innerHTML = '';
+  apiServise.pagination(currentPage);
+  
+  if (apiServise.query) {
+    searchFetch()
+  } else {
+    fetchGall()
+  }
+  
+}
+
+
+function onNextBtnClick(evt) {
+    evt.preventDefault();
+
+  if (currentPage !== totalPages) {
+    currentPage += 1;
+  }
+  refs.gallery.innerHTML = '';
+  pageList.innerHTML = '';
+  apiServise.pagination(currentPage)
+  
+  if (apiServise.query) {
+    searchFetch()
+  } else {
+    fetchGall()
+  }
+  
+}
+
+function renderPagesList() {
+  const start = currentPage - pageRange;
+  const end = currentPage + pageRange;
+
+  for (let i = start; i <= end; i += 1){
+    if (i > 0 && i <= totalPages) {
+      pageList.insertAdjacentHTML('beforeend', `<li class="item"><button type="button">${i}</button></li>`);
+    }
+  }
+}
+
+function hideFirstLastBtn() {
+  currentPage < 4
+    ? firstPage.hidden = true
+    : firstPage.hidden = false;
+  currentPage > totalPages - 3
+    ? lastPage.hidden = true
+    : lastPage.hidden = false;
+}
+
+function checkBtnOpacity() {
+  currentPage === 1
+    ? prevBtn.disabled = true
+    : prevBtn.disabled = false;
+  currentPage === totalPages
+    ? nextBtn.disabled = true
+    : nextBtn.disabled = false;   
+}
+
+function makeActiveBtn() {
+  let pagesMenu = pageList.querySelectorAll('button')
+  for (let i = 0; i < pagesMenu.length; i += 1){
+  if (Number(pagesMenu[i].textContent) === currentPage) {
+    pagesMenu[i].classList.add('active')
+  }
+}
+}
+
+function init() {
+  
+  checkBtnOpacity();
+  hideFirstLastBtn();
+  renderPagesList();
+  makeActiveBtn();
+}
+
+// console.log(currentPage)
+apiServise.pagination(currentPage)
+fetchGall()

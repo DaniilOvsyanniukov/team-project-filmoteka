@@ -14,5 +14,5 @@ import './js/footer-modal.js';
 import './js/library.js';
 
 //Igor
-import './js/pagination.js'
+// import './js/pagination.js'
 

@@ -8,22 +8,22 @@ export default class ApiServise {
   }
 
   fetchPopularMovies() {
-    const url = `${BASE_URL}/trending/all/day?api_key=${API_KEY}`;
+    const url = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&page=${this.page}`;
     return fetch(url)
       .then(response => response.json())
-      .then(({ results }) => {
-        return results;
-      });
+      // .then(({ results }) => {
+      //   return results;
+      // });
   }
 
   fetchMoviesByRequest() {
     const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${this.searchQuery}&page=${this.page}&include_adult=false`;
     return fetch(url)
       .then(response => response.json())
-      .then(({ results }) => {
-        this.incrementPage();
-        return results;
-      });
+      // .then(({ results }) => {
+      //   this.incrementPage();
+      //   return results;
+      // });
   }
 
 
@@ -63,5 +63,9 @@ export default class ApiServise {
 
   clearInput() {
     this.searchQuery.innerHTML = '';
+  }
+
+  pagination(el) {
+    this.page = el;
   }
 }
