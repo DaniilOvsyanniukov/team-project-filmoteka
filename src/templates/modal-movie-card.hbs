@@ -1,6 +1,6 @@
-<div class="modal-movie-card" data-id={{id}}>
+<div class="modal-movie-card">
     <div class="modal-poster-container">
-        <img src="https://image.tmdb.org/t/p/w154{{poster_path}}" alt="{{original_title}} poster" data-id={{id}}>
+        <img class="modal-movie-poster" src="https://image.tmdb.org/t/p/original{{poster_path}}" alt="{{original_title}} poster" data-id={{id}}>
     </div>
 
     <div class="card-descr-container">
@@ -9,46 +9,45 @@
 
         <div class="card-descr-elements">
 
-            <p class="elem">Vote / Votes
-                <span class="vote"> <span class="vote-average">{{vote_average}}</span> / <span
-                        class="vote-count">{{vote_count}}</span></span>
+            <p class="card-descr-elem votes">Vote / Votes
+                <span class="vote-average">{{vote_average}}</span> 
+                / 
+                <span class="vote-count">{{vote_count}}</span>
             </p>
 
-            <p class="elem">Popularity
+            <p class="card-descr-elem">Popularity
                 <span class="pop">{{popularity}}</span>
             </p>
 
-            <p class="elem">Original Title
+            <p class="card-descr-elem">Original Title
                 <span class="original">{{original_title}}</span>
             </p>
 
-            <p class="elem">Genre{{#each genres}}
-                <span class="genre">{{this.name}}</span>
-                {{/each}}
-            </p>
+            <div class="genres-wrapper">
+
+                <p class="card-descr-elem genres">Genre</p>
+                <p class="genres-list">
+                    {{#each genres}}
+                    <span class="genre-item">{{this.name}}</span>
+                    {{/each}}
+                </p>
+
+            </div>
 
         </div>
 
         <p class="modal-about">About</p>
         <p class="modal-movie-description">{{overview}}</p>
-    </div>
+
+    <div class="modal-btn-container">
     
-    <div class="btn-container">
-
-        <button type='button' 
-        class="watched"
-        data-dir="watched"
-        data-id={{id}}>Add to watched</button>
-
-
-        
-        <button type='button' 
-        class="queue" 
-        data-source="queue"
-        data-id={{id}}>Add to queue</button>
+        <button type='button' class="add-btn watched" data-dir="watched" data-id={{id}}>Add to <br> watched</button>
+    
+        <button type='button' class="add-btn queue" data-source="queue" data-id={{id}}>Add to queue</button>
+    
+    </div>
 
     </div>
-    
 
 </div>
 
