@@ -4,6 +4,8 @@ const libraryLink = document.querySelector('.library-js');
 const listOfHeaderBtns = document.querySelector('.buttons.list');
 const gallery = document.querySelector('.movie-list-js');
 const titleNoMovie = document.querySelector('.no-movie');
+const plaginationEl = document.querySelector('.pagination');
+const section = document.querySelector('.gall-js');
 //yarik
 const searchForm = document.querySelector('.search-form-js');
 const homePageLink = document.querySelector('.home-js');
@@ -15,8 +17,9 @@ listOfHeaderBtns.addEventListener('click', onListOfHeadersBtns);
 
 function onLibraryLinkCLick(event) {
   event.preventDefault();
-
+  plaginationEl.style.display = 'none';
   listOfHeaderBtns.classList.remove('visually-hidden');
+  section.classList.add('section-library-height');
   //yarik
   searchForm.classList.add('visually-hidden');
   homePageLink.classList.remove('current-page');
@@ -44,7 +47,7 @@ function renderMarkupFromLocalStorage(key) {
   gallery.innerHTML = '';
   const moviesFromLocalStorage = JSON.parse(localStorage.getItem(key));
   const updateInfoFroLocalStarage = sliceGanresDate(moviesFromLocalStorage);
-  console.log(updateInfoFroLocalStarage);
+
   gallery.insertAdjacentHTML('beforeend', movieMarkup(updateInfoFroLocalStarage));
 }
 
