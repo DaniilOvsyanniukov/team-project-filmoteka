@@ -17,8 +17,8 @@
   text-align: center;
   vertical-align: middle;
   width: 100%;
-  transform: scale(1.1);
-  transition: opacity 2500ms cubic-bezier(0.4, 0, 0.2, 1);
+  // transform: scale(1.1);
+  // transition: opacity 2500ms cubic-bezier(0.4, 0, 0.2, 1);
   //transition: all 2500ms cubic-bezier(0.4, 0, 0.2, 1);
 
   // transition: all 2500ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -46,9 +46,6 @@
 
   overflow-y: auto;
 
-  transform: scale(1);
-  transition: opacity 2500ms cubic-bezier(0.4, 0, 0.2, 1);
-
   @media screen and (max-width: 479px) {
     width: 300px;
   }
@@ -73,6 +70,7 @@
 //======================title======================
 
 .modal-title {
+  position: relative;
   font-weight: 500;
   font-size: 30px;
   line-height: 16px;
@@ -186,9 +184,7 @@
   position: fixed;
   display: flex;
 
-  top: 18px;
   right: calc(50% - 157.5px);
-  // right: 78px;
 
   width: 35px;
   height: 35px;
@@ -223,8 +219,7 @@
   }
 
   @media screen and (min-width: 1024px) {
-    top: 30px;
-    right: calc(50% - 485px);
+    right: calc(50% - 490px);
   }
 
   &:hover,
