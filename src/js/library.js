@@ -8,13 +8,16 @@ const titleNoMovie = document.querySelector('.no-movie');
 const searchForm = document.querySelector('.search-form-js');
 const homePageLink = document.querySelector('.home-js');
 const header = document.querySelector('.header-js');
-//
+
+const pagination = document.querySelector('.pagination') // (Ihor) ссылка на пагинацию
 
 libraryLink.addEventListener('click', onLibraryLinkCLick);
 listOfHeaderBtns.addEventListener('click', onListOfHeadersBtns);
 
 function onLibraryLinkCLick(event) {
   event.preventDefault();
+
+  pagination.classList.add('visually-hidden') //(Ihor) при клике на кнопку библиотеки, пагинация прячется
 
   listOfHeaderBtns.classList.remove('visually-hidden');
   //yarik
