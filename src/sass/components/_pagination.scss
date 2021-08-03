@@ -29,15 +29,14 @@
   background-color: var(--pagination-and-footer-background);
 }
 
-.next-btn{
+.next-btn {
   background-image: url(../images/arrow-left.svg);
   background-size: cover;
   background-position: 12px 12px;
   background-repeat: no-repeat;
-  
 }
 
-.prev-btn{
+.prev-btn {
   background-image: url(../images/arrow-left.svg);
   background-size: cover;
   background-position: 12px 12px;
@@ -49,7 +48,6 @@
   background-color: var(--header-line-and-numbers);
   color: var(--white);
 }
-
 
 @media screen and (max-width: 767px) {
   .first,
@@ -65,17 +63,15 @@
     margin: 0 auto;
   }
 
-  .pagination-mid{
+  .pagination-mid {
     display: flex;
   }
 
-  .dots{
+  .dots {
     font-style: normal;
     font-weight: 500;
     font-size: 12px;
     line-height: 16px;
     color: var(--black);
   }
-
 }
-
