@@ -1,13 +1,12 @@
 import ApiService from './api-service';
 
-const watchedBtn = document.querySelector('.watched');
-const queueBtn = document.querySelector('.queue');
-const modal = document.querySelector('.modal');
-
 const API = new ApiService();
 
-const watchedList = JSON.parse(localStorage.getItem('watchedList') || '[]');
-const queueList = JSON.parse(localStorage.getItem('queue') || '[]');
+
+const modal = document.querySelector('.modal');
+
+const watchedList = JSON.parse(localStorage.getItem('watched movies') || '[]');
+const queueList = JSON.parse(localStorage.getItem('In queue') || '[]');
 
 modal.addEventListener('click', onModalButtons);
 
@@ -22,18 +21,22 @@ function onModalButtons(e) {
     if (e.target.classList.contains('watched') && repeatedIndexWatched !== -1) {
       watchedList.splice(repeatedIndexWatched, 1);
       localStorage.setItem('watched movies', JSON.stringify(watchedList));
+      e.target.textContent = 'Add to watched'
     } else {
       API.fetchMovieDetails(id).then(data => {
         insertToStorage(data, watchedList, 'watched movies');
+        e.target.textContent = 'Remove from watched'
       });
     }
   } else if (e.target.hasAttribute('data-source')) {
     if (e.target.classList.contains('queue') && repeatedIndexQueue !== -1) {
       queueList.splice(repeatedIndexQueue, 1);
       localStorage.setItem('In queue', JSON.stringify(queueList));
+      e.target.textContent = 'Add to queue'
     } else {
       API.fetchMovieDetails(id).then(data => {
         insertToStorage(data, queueList, 'In queue');
+        e.target.textContent = 'Remove from queue'
       });
     }
   }
