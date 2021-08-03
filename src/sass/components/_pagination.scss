@@ -19,6 +19,18 @@
   font-size: 12px;
   line-height: 16px;
   color: var(--black);
+  cursor: pointer;
+
+  transition: all var(--animation-duration) ease;
+
+  &:hover,
+  &:focus {
+    transform: scale(1.01);
+    box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.16), 0px 4px 4px rgba(0, 0, 0, 0.06),
+      0px 1px 1px rgba(0, 0, 0, 0.12);
+    background-color: var(--pagination-and-footer-background);
+    outline: none;
+  }
 }
 
 .next-btn,
@@ -26,7 +38,18 @@
   width: 40px;
   height: 40px;
   border: none;
+  border-radius: 5px;
+  cursor: pointer;
   background-color: var(--pagination-and-footer-background);
+
+  transition: all var(--animation-duration) ease;
+
+  &:hover,
+  &:focus {
+    box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.16), 0px 4px 4px rgba(0, 0, 0, 0.06),
+      0px 1px 1px rgba(0, 0, 0, 0.12);
+      outline: none;
+  }
 }
 
 .next-btn {
@@ -47,6 +70,10 @@
 .active-btn {
   background-color: var(--header-line-and-numbers);
   color: var(--white);
+    &:hover,
+    &:focus {
+      background-color: var(--header-line-and-numbers);
+    }
 }
 
 @media screen and (max-width: 767px) {

@@ -13,6 +13,13 @@ body.dark-theme {
     color: var(--white);
   }
 
+  .pagination-btn{
+    &:hover,
+    &:focus{
+      color: var(--black);     // (Ihor) меняет цвет номерков при ховере
+    }
+  }
+
   .close-btn,
   .scroll-button {
     fill: var(--white);
