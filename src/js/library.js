@@ -127,7 +127,11 @@ function firstSixMovies(key) {
   gallery.innerHTML = '';
   const moviesFromLocalStorage = JSON.parse(localStorage.getItem(key));
 
-  if (moviesFromLocalStorage === null) {
+ if (moviesFromLocalStorage === null) {
+    gallery.classList.add('galleryEmptySpace');
+    titleNoMovie.classList.remove('display-none');
+    return;
+  } else if (moviesFromLocalStorage.length === 0) {
     gallery.classList.add('galleryEmptySpace');
     titleNoMovie.classList.remove('display-none');
     return;
