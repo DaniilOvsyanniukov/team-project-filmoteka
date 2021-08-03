@@ -89,7 +89,7 @@
 
 .original {
   display: inline-block;
-  max-width: 112px;
+  max-width: 120px;
   margin-left: 39px;
   font-weight: 500;
   font-size: 12px;
@@ -188,20 +188,23 @@
       line-height: 1.172;
     }
   }
-}
+  .card-descr-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 264px;
+  }
 
-.card-descr-container {
-  display: flex;
-  flex-direction: column;
-  max-width: 264px;
-}
+  .watched {
+    margin-right: 15px;
+  }
 
-.watched {
-  margin-right: 15px;
-}
+  .add-btn {
+    width: 125px;
+  }
 
-.add-btn {
-  width: 125px;
+  .original {
+    max-width: 140px;
+  }
 }
 
 @media screen and (min-width: 1024px) {
@@ -232,6 +235,9 @@
 
   .add-btn {
     width: 136px;
+  }
+  .original {
+    max-width: 260px;
   }
 }
 

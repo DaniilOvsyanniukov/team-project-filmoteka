@@ -5,7 +5,6 @@ import movieDetails from '../templates/modal-movie-card.hbs';
 
 const apiService = new ApiService();
 
-// console.log(apiService.fetchMovieDetails(522931))
 
 const refs = {
   backdrop: document.querySelector('.backdrop'),
@@ -13,66 +12,95 @@ const refs = {
   closeBtn: document.querySelector('.close-btn'),
 };
 
-galRefs.gallery.addEventListener('click', onCollection);
+galRefs.gallery.addEventListener('click', onGallery);
 refs.closeBtn.addEventListener('click', onCloseBtn);
 refs.backdrop.addEventListener('click', onBackdrop);
 
-function onCollection(e) {
+
+function onGallery(e) {
   e.preventDefault();
 
-  if (e.target.tagName.toLowerCase() !== 'img') {
-    return;
+  const id = JSON.parse(e.target.dataset.action);
+  const watchedList = JSON.parse(localStorage.getItem('watched movies') || '[]');
+  const queueList = JSON.parse(localStorage.getItem('In queue') || '[]');
+  const repeatInWatch = watchedList.some(elem => elem.id === id);
+  const repeatInQueue = queueList.some(elem => elem.id === id);
+
+  if (e.target.tagName.toLowerCase() !== 'img') return;
+
+  if (repeatInWatch === true && repeatInQueue === true) {
+    
+    apiService.fetchMovieDetails(e.target.dataset.action).then(data => {
+      data.wbuttonText = 'Remove from watched'
+      data.qbuttonText = 'Remove from queue'
+      clearModalMovieCardContainer();
+      appendInModalCard(data);
+    });
+    refs.backdrop.classList.remove('is-hidden');
+    window.addEventListener('keyup', onKeyClose);
   }
-
-  apiService.fetchMovieDetails(e.target.dataset.action).then(data => {
-    clearModalMovieCardContainer();
-    appendInModalCard(data);
-  });
-
-  refs.backdrop.classList.remove('is-hidden');
-
-  window.addEventListener('keyup', onKeyClose);
+  
+  else if (repeatInWatch === true && repeatInQueue !== true) {
+      apiService.fetchMovieDetails(e.target.dataset.action).then(data => {
+        data.wbuttonText = 'Remove from watched'
+        data.qbuttonText = 'Add to queue'
+        clearModalMovieCardContainer();
+        appendInModalCard(data);
+      });
+    refs.backdrop.classList.remove('is-hidden');
+    window.addEventListener('keyup', onKeyClose);
+  }
+  
+  else if (repeatInWatch !== true && repeatInQueue === true) {
+      apiService.fetchMovieDetails(e.target.dataset.action).then(data => {
+        data.wbuttonText = 'Add to watched'
+        data.qbuttonText = 'Remove from queue'
+        clearModalMovieCardContainer();
+        appendInModalCard(data);
+      });
+    refs.backdrop.classList.remove('is-hidden');
+    window.addEventListener('keyup', onKeyClose);
+  }
+  
+  else {
+    apiService.fetchMovieDetails(e.target.dataset.action).then(data => {
+      data.wbuttonText = 'Add to watched'
+      data.qbuttonText = 'Add to queue'
+      clearModalMovieCardContainer();
+      appendInModalCard(data);
+    });
+    refs.backdrop.classList.remove('is-hidden');
+    window.addEventListener('keyup', onKeyClose);
+  }
 }
 
-// function destructObj({ id, title, overview, backdrop_path, original_title, poster_path, release_date, vote_average, vote_count, popularity, genres }) {
-//   return { id, title, overview, backdrop_path, original_title, poster_path, release_date, vote_average, vote_count, popularity, genres, dataMovie: JSON.stringify({
-//       id,
-//       title,
-//       backdrop_path,
-//       original_title,
-//       poster_path,
-//       release_date,
-//       vote_average,
-//       vote_count,
-//       popularity,
-//       genres,
-//     }) }
-// }
 
 function appendInModalCard(data) {
-  // const destrData = destructObj(data)
-  // console.log(destrData)
   refs.movieCardContainer.insertAdjacentHTML('beforeend', movieDetails(data));
-}
+};
+
 
 function clearModalMovieCardContainer() {
   refs.movieCardContainer.innerHTML = '';
-}
+};
+
 
 function onCloseBtn(e) {
   refs.backdrop.classList.add('is-hidden');
 
   window.removeEventListener('keyup', onKeyClose);
-}
+};
+
 
 function onBackdrop(e) {
   if (e.target === e.currentTarget) {
     onCloseBtn();
-  }
-}
+  };
+};
+
 
 function onKeyClose(e) {
   if (e.code === 'Escape') {
     onCloseBtn();
-  }
-}
+  };
+};
