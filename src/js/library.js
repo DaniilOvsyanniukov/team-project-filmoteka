@@ -10,7 +10,7 @@ const section = document.querySelector('.gall-js');
 const searchForm = document.querySelector('.search-form-js');
 const homePageLink = document.querySelector('.home-js');
 const header = document.querySelector('.header-js');
-//
+
 
 libraryLink.addEventListener('click', onLibraryLinkCLick);
 listOfHeaderBtns.addEventListener('click', onListOfHeadersBtns);
