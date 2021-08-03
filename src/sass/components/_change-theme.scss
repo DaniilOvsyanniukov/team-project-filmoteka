@@ -13,10 +13,10 @@ body.dark-theme {
     color: var(--white);
   }
 
-  .pagination-btn{
+  .pagination-btn {
     &:hover,
-    &:focus{
-      color: var(--black);     // (Ihor) меняет цвет номерков при ховере
+    &:focus {
+      color: var(--black); // (Ihor) меняет цвет номерков при ховере
     }
   }
 
@@ -64,6 +64,7 @@ body.dark-theme {
 .toolbar {
   display: flex;
   justify-content: flex-end;
+  margin-top: 30px;
   //position: absolute;
 
   //   @media screen and (max-width: 479px) {
