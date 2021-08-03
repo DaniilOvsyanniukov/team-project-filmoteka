@@ -1,6 +1,7 @@
 
 <header class="header header-home header-js" id="Home">
     <div class="container">
+
         <nav class="nav">
             <a href="./index.html" class="main-page-link">
                 <svg class="header-logo" width="24" height="24">
@@ -17,6 +18,7 @@
                     <a href="" class="nav-list-link library-js">My library</a>
                 </li>
             </ul>
+            
         </nav>
 
         <!-- <span class="input-wrapper"> -->
@@ -41,6 +43,28 @@
                 <button type="button" class="library-btn disabled-btn queue-js">Queue</button>
             </li>
         </ul>
+
+        <!-- смена темы >>>>>>>>>>>>>> -->
+        
+        <div class="toolbar">
+            <svg class="theme-switch__icon sun" role="img" aria-label="Иконка солнца">
+                <use href="./images/sprite.svg#icon-sun"></use>
+            </svg>
+            <div class="theme-switch">
+                <div class="theme-switch__control">
+                    <input class="theme-switch__toggle" type="checkbox" name="theme" id="theme-switch-toggle"
+                        aria-label="Переключить между тёмной и светлой темой" />
+                    <label aria-hidden="true" class="theme-switch__track" for="theme-switch-toggle">
+                    </label>
+                    <div aria-hidden="true" class="theme-switch__marker"></div>
+                </div>
+            </div>
+            <svg class="theme-switch__icon moon" aria-label="Иконка луны">
+                <use href="./images/sprite.svg#icon-moon"></use>
+            </svg>
+        </div>
+
+        <!-- <<<<<<<<<<<< смена темы -->
 
     </div>
 

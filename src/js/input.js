@@ -1,9 +1,30 @@
 import refs from './refs';
 import movieMarkup from '../templates/movie-card';
 import ApiServise from './api-service';
+//импорт toastr notification
+import toastr from 'toastr';
+import 'toastr/build/toastr.css';
+//настройи toastr notification
+toastr.options = {
+  closeButton: false,
+  debug: true,
+  newestOnTop: false,
+  progressBar: true,
+  positionClass: 'toast-top-center',
+  preventDuplicates: true,
+  onclick: null,
+  showDuration: '300',
+  hideDuration: '1000',
+  timeOut: '3000',
+  extendedTimeOut: '1000',
+  showEasing: 'swing',
+  hideEasing: 'linear',
+  showMethod: 'fadeIn',
+  hideMethod: 'fadeOut',
+};
 
 const apiServise = new ApiServise();
-
+//  (Ihor) объявление переменных и ссылок для пагинации
 let currentPage = 1;
 let totalPages;
 const pageRange = 2;
@@ -16,18 +37,11 @@ const nextBtn = document.getElementById('button-next');
 const firstPage = document.querySelector('.first');
 const lastPage = document.querySelector('.last');
 
-init()
-
-// apiServise
-//   .fetchPopularMovies()
-//   .then(results => {
-//     renderMarkup(match(destructArray(results)));
-//     setTimeout(preloader, 200);
-//   })
-//   .catch(error => console.log(error));
+init(); //(Ihor)  отрисовка страницы при первой загрузке
 
 refs.searchForm.addEventListener('submit', onSearchForm);
 
+//ф-ция для изменения данных, приходящих с бэка
 function match(arr) {
   const IMG_PATH = 'https://image.tmdb.org/t/p/original/';
   return arr.map(el => {
@@ -61,6 +75,7 @@ function match(arr) {
   });
 }
 
+//ф-ция для поиска жанров по айди
 function findGenre(el) {
   const genresBD = [
     { id: 28, name: 'Action' },
@@ -94,58 +109,42 @@ function findGenre(el) {
   return result;
 }
 
-// function onSearchForm(e) {
-//   e.preventDefault();
-//   apiServise.query = e.currentTarget.elements.query.value;
-
-//   if (apiServise.query.trim() === '') {
-//     return alert('Пожалуйста, введите ваш запрос');
-//   }
-
-//   clearGallery();
-//   clearInput(e);
-//   refs.preloader.classList.remove('done');
-//   apiServise.resetPage();
-//   apiServise
-//     .fetchMoviesByRequest()
-//     .then(results => {
-//       renderMarkup(match(destructArray(results)));
-//       setTimeout(preloader, 200);
-//     })
-//     .catch(error => console.log(error));
-// }
-
+//ф-ция отправки запроса на апи
 function onSearchForm(e) {
   e.preventDefault();
   apiServise.query = e.currentTarget.elements.query.value;
 
   if (apiServise.query.trim() === '') {
-    return alert('Пожалуйста, введите ваш запрос');
+    return toastr.warning('Пожалуйста, введите ваш запроc');
   }
 
   clearGallery();
   clearInput(e);
   pageList.innerHTML = '';
-  
+
   refs.preloader.classList.remove('done');
   apiServise.resetPage();
   currentPage = 1;
-  searchFetch()
+  searchFetch(); // (Ihor) отрисовка страницы по результату поиска
 }
 
+//ф-ция для очистки разметки галлереи
 function clearGallery() {
   refs.gallery.innerHTML = '';
 }
 
+//ф-ция для очистки инпута
 function clearInput(e) {
   e.currentTarget.elements.query.value = '';
 }
 
+//ф-ция для рендеринга данных в галлерею
 function renderMarkup(results) {
   const destrResults = destructArray(results);
   refs.gallery.insertAdjacentHTML('beforeend', movieMarkup(destrResults));
 }
 
+//ф-ция для изменения массива, приходящего с бека
 function destructArray(arr) {
   return arr.map(
     ({
@@ -199,151 +198,154 @@ function destructObj({ id, backdrop_path, original_title, poster_path, genre_ids
   };
 }
 
+//ф-ция для отображения загрузчика
 function preloader() {
   if (!refs.preloader.classList.contains('done')) {
     refs.preloader.classList.add('done');
   }
 }
 
-//                                Код пагинации
+//           (Ihor) Код пагинации
 
 function searchFetch() {
+  // (Ihor) обработка ответа API по результату поиска и отрисовка страницы
   apiServise
     .fetchMoviesByRequest()
     .then(data => {
       totalPages = data.total_pages;
       lastBtn.textContent = totalPages;
       // console.log(data)
-      init()
+      init();
       return data.results;
-    }).then(results => {
+    })
+    .then(results => {
+      if (results.length < 1) {
+        toastr.error('Фильм не найден! Измените ввод и повторите попытку');
+      }
       renderMarkup(match(destructArray(results)));
       setTimeout(preloader, 200);
     })
-    
+
     .catch(error => console.log(error));
 }
-
+// (Ihor) обработка ответа API по умолчанию(популярные фильмы) и отрисовка страницы
 function fetchGall() {
-    apiServise
+  apiServise
     .fetchPopularMovies()
     .then(data => {
       totalPages = data.total_pages;
       lastBtn.textContent = totalPages;
       // console.log(data)
-      init()
+      init();
       return data.results;
-    }).then(results => {
-      renderMarkup(match(destructArray(results)));
-    setTimeout(preloader, 200);
     })
-    
-  .catch(error => console.log(error));
-}
+    .then(results => {
+      renderMarkup(match(destructArray(results)));
+      setTimeout(preloader, 200);
+    })
 
+    .catch(error => console.log(error));
+}
 
 paginationList.addEventListener('click', onBtnClick);
 prevBtn.addEventListener('click', onPrevBtnClick);
 nextBtn.addEventListener('click', onNextBtnClick);
 
+// (Ihor) изменение нумерации при клике на кнопки с цифрами
 function onBtnClick(evt) {
-    evt.preventDefault();
+  evt.preventDefault();
 
   if (evt.target.nodeName !== 'BUTTON') {
     return;
   }
-  
+
   refs.gallery.innerHTML = '';
   pageList.innerHTML = '';
-  
-  currentPage =  Number (evt.target.textContent)
+
+  currentPage = Number(evt.target.textContent);
   apiServise.pagination(currentPage);
-  
+
   if (apiServise.query) {
-    searchFetch()
+    searchFetch();
   } else {
-    fetchGall()
+    fetchGall();
   }
-  
 }
 
+// (Ihor) изменение нумерации на 1 при клике на кнопку Prev
 function onPrevBtnClick(evt) {
-    evt.preventDefault();
-    
+  evt.preventDefault();
+
   if (currentPage > 1) {
-    currentPage -= 1
+    currentPage -= 1;
   }
   refs.gallery.innerHTML = '';
   pageList.innerHTML = '';
   apiServise.pagination(currentPage);
-  
+
   if (apiServise.query) {
-    searchFetch()
+    searchFetch();
   } else {
-    fetchGall()
+    fetchGall();
   }
-  
 }
 
-
+// (Ihor) изменение нумерации на 1 при клике на кнопку Next
 function onNextBtnClick(evt) {
-    evt.preventDefault();
+  evt.preventDefault();
 
   if (currentPage !== totalPages) {
     currentPage += 1;
   }
   refs.gallery.innerHTML = '';
   pageList.innerHTML = '';
-  apiServise.pagination(currentPage)
-  
+  apiServise.pagination(currentPage);
+
   if (apiServise.query) {
-    searchFetch()
+    searchFetch();
   } else {
-    fetchGall()
+    fetchGall();
   }
-  
 }
 
+// (Ihor) динамически рендерится список кнопок
 function renderPagesList() {
   const start = currentPage - pageRange;
   const end = currentPage + pageRange;
 
-  for (let i = start; i <= end; i += 1){
+  for (let i = start; i <= end; i += 1) {
     if (i > 0 && i <= totalPages) {
-      pageList.insertAdjacentHTML('beforeend', `<li class="item"><button type="button">${i}</button></li>`);
+      pageList.insertAdjacentHTML(
+        'beforeend',
+        `<li class="pages-item"><button type="button" class="pagination-btn">${i}</button></li>`,
+      );
     }
   }
 }
 
+// (Ihor) скрывает и показывает первую и последнюю кнопки
 function hideFirstLastBtn() {
-  currentPage < 4
-    ? firstPage.hidden = true
-    : firstPage.hidden = false;
-  currentPage > totalPages - 3
-    ? lastPage.hidden = true
-    : lastPage.hidden = false;
+  currentPage < 4 ? (firstPage.hidden = true) : (firstPage.hidden = false);
+  currentPage > totalPages - 3 ? (lastPage.hidden = true) : (lastPage.hidden = false);
 }
 
+// (Ihor) делает неактивными кнопки-стрелки
 function checkBtnOpacity() {
-  currentPage === 1
-    ? prevBtn.disabled = true
-    : prevBtn.disabled = false;
-  currentPage === totalPages
-    ? nextBtn.disabled = true
-    : nextBtn.disabled = false;   
+  currentPage === 1 ? (prevBtn.disabled = true) : (prevBtn.disabled = false);
+  currentPage === totalPages ? (nextBtn.disabled = true) : (nextBtn.disabled = false);
 }
 
+// (Ihor) делает активную кнопку
 function makeActiveBtn() {
-  let pagesMenu = pageList.querySelectorAll('button')
-  for (let i = 0; i < pagesMenu.length; i += 1){
-  if (Number(pagesMenu[i].textContent) === currentPage) {
-    pagesMenu[i].classList.add('active')
+  let pagesMenu = pageList.querySelectorAll('button');
+  for (let i = 0; i < pagesMenu.length; i += 1) {
+    if (Number(pagesMenu[i].textContent) === currentPage) {
+      pagesMenu[i].classList.add('active-btn');
+    }
   }
-}
 }
 
 function init() {
-  
   checkBtnOpacity();
   hideFirstLastBtn();
   renderPagesList();
@@ -351,5 +353,5 @@ function init() {
 }
 
 // console.log(currentPage)
-apiServise.pagination(currentPage)
-fetchGall()
+apiServise.pagination(currentPage);
+fetchGall();
