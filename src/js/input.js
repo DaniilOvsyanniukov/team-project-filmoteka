@@ -1,9 +1,10 @@
 import refs from './refs';
 import movieMarkup from '../templates/movie-card';
 import ApiServise from './api-service';
-//toastr notification
+//импорт toastr notification
 import toastr from 'toastr';
 import 'toastr/build/toastr.css';
+//настройи toastr notification
 toastr.options = {
   closeButton: false,
   debug: true,
@@ -14,7 +15,7 @@ toastr.options = {
   onclick: null,
   showDuration: '300',
   hideDuration: '1000',
-  timeOut: '2000',
+  timeOut: '3000',
   extendedTimeOut: '1000',
   showEasing: 'swing',
   hideEasing: 'linear',
@@ -40,6 +41,7 @@ init(); //(Ihor)  отрисовка страницы при первой заг
 
 refs.searchForm.addEventListener('submit', onSearchForm);
 
+//ф-ция для изменения данных, приходящих с бэка
 function match(arr) {
   const IMG_PATH = 'https://image.tmdb.org/t/p/original/';
   return arr.map(el => {
@@ -73,6 +75,7 @@ function match(arr) {
   });
 }
 
+//ф-ция для поиска жанров по айди
 function findGenre(el) {
   const genresBD = [
     { id: 28, name: 'Action' },
@@ -106,6 +109,7 @@ function findGenre(el) {
   return result;
 }
 
+//ф-ция отправки запроса на апи
 function onSearchForm(e) {
   e.preventDefault();
   apiServise.query = e.currentTarget.elements.query.value;
@@ -124,19 +128,23 @@ function onSearchForm(e) {
   searchFetch(); // (Ihor) отрисовка страницы по результату поиска
 }
 
+//ф-ция для очистки разметки галлереи
 function clearGallery() {
   refs.gallery.innerHTML = '';
 }
 
+//ф-ция для очистки инпута
 function clearInput(e) {
   e.currentTarget.elements.query.value = '';
 }
 
+//ф-ция для рендеринга данных в галлерею
 function renderMarkup(results) {
   const destrResults = destructArray(results);
   refs.gallery.insertAdjacentHTML('beforeend', movieMarkup(destrResults));
 }
 
+//ф-ция для изменения массива, приходящего с бека
 function destructArray(arr) {
   return arr.map(
     ({
@@ -190,6 +198,7 @@ function destructObj({ id, backdrop_path, original_title, poster_path, genre_ids
   };
 }
 
+//ф-ция для отображения загрузчика
 function preloader() {
   if (!refs.preloader.classList.contains('done')) {
     refs.preloader.classList.add('done');
@@ -210,6 +219,9 @@ function searchFetch() {
       return data.results;
     })
     .then(results => {
+      if (results.length < 1) {
+        toastr.error('Фильм не найден! Измените ввод и повторите попытку');
+      }
       renderMarkup(match(destructArray(results)));
       setTimeout(preloader, 200);
     })
