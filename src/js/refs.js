@@ -1,16 +1,9 @@
-const searchForm = document.querySelector('.search-form');
-const gallery = document.querySelector('.movie-list');
-const preloader = document.querySelector('.preloader');
-const videoContainer = document.querySelector('.youTube-video-container');
-const youTubeModal = document.querySelector('.youTube-modal');
-const vidoCloseBtn = document.querySelector('.youTube-close-btn');
-
 export default {
-  searchForm,
-  gallery,
-  preloader,
-  videoContainer,
-  youTubeModal,
-  vidoCloseBtn,
+searchForm : document.querySelector('.search-form'),
+gallery : document.querySelector('.movie-list'),
+preloader : document.querySelector('.preloader'),
+videoContainer : document.querySelector('.youTube-video-container'),
+youTubeModal : document.querySelector('.youTube-modal'),
+vidoCloseBtn : document.querySelector('.youTube-close-btn'),
 
 };
