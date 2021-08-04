@@ -258,29 +258,6 @@
 }
 
 // Видео трейлер стили
-// .youTube-modal {
-//   position: absolute;
-//   top: 50%;
-//   left: 50%;
-//   width: 600px;
-//   height: 350px;
-//   background-color: aqua;
-//   justify-content: center;
-//   align-items: center;
-//   z-index: 2000;
-// }
-// .youTube-close-btn {
-//   position: absolute;
-//   top: 10px;
-//   right: 10px;
-//   background-color: red;
-//   width: 30px;
-//   height: 30px;
-//   border: none;
-//   cursor: pointer;
-//   width: 14px;
-//   height: 14px;
-// }
 
 .youtube-btn {
   position: absolute;
@@ -289,25 +266,51 @@
   justify-content: center;
   align-items: center;
   box-sizing: inherit;
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
   border-radius: 50px;
 
   outline: none;
   border: none;
   cursor: pointer;
-  //opacity: 0;
+  // opacity: 0;
 
-  top: 40%;
-  right: 70%;
+  top: 20%;
+  right: 40%;
 
   background: url('../images/play2.svg') no-repeat;
   background-position: 50% 50%;
   background-size: contain;
 
+  @media screen and (max-width: 479px) {
+    top: 30%;
+  }
+
+  @media screen and (min-width: 480px) and (max-width: 767px) {
+    top: 30%;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    top: 40%;
+    right: 70%;
+  }
+
+  @media screen and (min-width: 1024px) {
+    width: 100px;
+    height: 100px;
+    top: 40%;
+    right: 70%;
+  }
+
   &:hover,
   &:focus {
-    //opacity: 1;
+    // opacity: 1;
     background-color: var(--error-text);
+    transition: opacity var(--animation-duration) var(--timing-function);
+  }
+
+  .modal-movie-poster:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+    transition: opacity var(--animation-duration) var(--timing-function);
   }
 }
