@@ -36,7 +36,8 @@ const prevBtn = document.getElementById('button-prev');
 const nextBtn = document.getElementById('button-next');
 const firstPage = document.querySelector('.first');
 const lastPage = document.querySelector('.last');
-const paginationBox = document.querySelector('.pagination')
+const paginationBox = document.querySelector('.pagination');
+const header = document.querySelector('.header');
 
 init(); //(Ihor)  отрисовка страницы при первой загрузке
 
@@ -268,6 +269,7 @@ function onBtnClick(evt) {
 
   currentPage = Number(evt.target.textContent);
   apiServise.pagination(currentPage);
+  scrollContent();
 
   if (apiServise.query) {
     searchFetch();
@@ -286,6 +288,7 @@ function onPrevBtnClick(evt) {
   refs.gallery.innerHTML = '';
   pageList.innerHTML = '';
   apiServise.pagination(currentPage);
+  scrollContent();
 
   if (apiServise.query) {
     searchFetch();
@@ -304,6 +307,7 @@ function onNextBtnClick(evt) {
   refs.gallery.innerHTML = '';
   pageList.innerHTML = '';
   apiServise.pagination(currentPage);
+  scrollContent();
 
   if (apiServise.query) {
     searchFetch();
@@ -347,6 +351,14 @@ function makeActiveBtn() {
       pagesMenu[i].classList.add('active-btn');
     }
   }
+}
+
+//(Ihor) делает плавный скролл на начало страницы при пагинации
+function scrollContent () {
+    header.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
+    });
 }
 
 function init() {
