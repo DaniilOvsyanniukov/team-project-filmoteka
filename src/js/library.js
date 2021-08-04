@@ -53,7 +53,7 @@ function onListOfHeadersBtns(event) {
   if (event.target.classList.contains('watched-js')) {
     watchedQueueFlag = true;
     renewParam(6); // сбрасываем параметры обрезки для корректного рендеринга карточек
-
+    
     firstSixMovies('watched movies'); // рендерим только 6 карточек, а остальное рендерит IntersectionObserve
   }
   //если кнопка кьюю то тогда рендерятся карточки из ключа кьюю + та же лагика что и выше с вотчед
@@ -155,7 +155,8 @@ function renewParam(num) {
 
 // экспортировал в modalCard.js для обновления списка в категориях при onCloseBtn()
 export default {
-  watchedQueueFlag,
+  // watchedQueueFlag,
   libraryLink,
   firstSixMovies,
+  // renewParam,
 }
