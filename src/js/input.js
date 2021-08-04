@@ -36,6 +36,7 @@ const prevBtn = document.getElementById('button-prev');
 const nextBtn = document.getElementById('button-next');
 const firstPage = document.querySelector('.first');
 const lastPage = document.querySelector('.last');
+const paginationBox = document.querySelector('.pagination')
 
 init(); //(Ihor)  отрисовка страницы при первой загрузке
 
@@ -220,7 +221,10 @@ function searchFetch() {
     })
     .then(results => {
       if (results.length < 1) {
+        paginationBox.classList.add('visually-hidden');
         toastr.error('Фильм не найден! Измените ввод и повторите попытку');
+      } else {
+        paginationBox.classList.remove('visually-hidden');
       }
       renderMarkup(match(destructArray(results)));
       setTimeout(preloader, 200);
