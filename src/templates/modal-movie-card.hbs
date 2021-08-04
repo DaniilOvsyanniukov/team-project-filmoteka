@@ -1,14 +1,10 @@
 <div class="modal-movie-card">
     <div class="modal-poster-container">
-        <img class="modal-movie-poster" src="https://image.tmdb.org/t/p/original{{poster_path}}" alt="{{original_title}} poster" data-id={{id}}>
-           
-               <button type="button" class="youtube-btn youtubeBtn-js" data-tailer="youtube" data-id={{id}}>
-                   <!-- <svg class="Youtube-icon">
-                         <use href="./images/sprite.svg#icon-close-modal-button"></use>
-                       </svg> -->
-               </button>
+        <img class="modal-movie-poster" src="https://image.tmdb.org/t/p/original{{poster_path}}"
+            alt="{{original_title}} poster" data-id={{id}}>
 
-    
+        <button type="button" class="youtube-btn youtubeBtn-js" data-tailer="youtube" data-id={{id}}></button>
+
     </div>
 
     <div class="card-descr-container">
@@ -18,8 +14,8 @@
         <div class="card-descr-elements">
 
             <p class="card-descr-elem votes">Vote / Votes
-                <span class="vote-average">{{vote_average}}</span> 
-                / 
+                <span class="vote-average">{{vote_average}}</span>
+                /
                 <span class="vote-count">{{vote_count}}</span>
             </p>
 
@@ -47,15 +43,14 @@
         <p class="modal-about">About</p>
         <p class="modal-movie-description">{{overview}}</p>
 
-    <div class="modal-btn-container">
+        <div class="modal-btn-container">
 
-        <button type='button' class="add-btn watched" data-dir="watched" data-id={{id}}>{{wbuttonText}}</button>
-    
-        <button type='button' class="add-btn queue" data-source="queue" data-id={{id}}>{{qbuttonText}}</button>
-    
-    </div>
+            <button type='button' class="add-btn watched" data-dir="watched" data-id={{id}}>{{wbuttonText}}</button>
+
+            <button type='button' class="add-btn queue" data-source="queue" data-id={{id}}>{{qbuttonText}}</button>
+
+        </div>
 
     </div>
 
 </div>
-

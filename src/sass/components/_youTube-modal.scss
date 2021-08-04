@@ -1,0 +1,36 @@
+.youTube-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 900px;
+  max-height: 700px;
+  padding: 40px;
+  background-color: var(--footer-color-text);
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.youTube-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: red;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 14px;
+  height: 14px;
+
+  &:hover,
+  &:focus {
+    background-color: red;
+
+    transition: transform var(--animation-duration) var(--timing-function);
+    width: 40px;
+    height: 40px;
+  }
+}
