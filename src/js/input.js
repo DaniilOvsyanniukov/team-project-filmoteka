@@ -36,7 +36,6 @@ const prevBtn = document.getElementById('button-prev');
 const nextBtn = document.getElementById('button-next');
 const firstPage = document.querySelector('.first');
 const lastPage = document.querySelector('.last');
-const paginationBox = document.querySelector('.pagination');
 const header = document.querySelector('.header');
 
 init(); //(Ihor)  отрисовка страницы при первой загрузке
@@ -222,10 +221,9 @@ function searchFetch() {
     })
     .then(results => {
       if (results.length < 1) {
-        paginationBox.classList.add('visually-hidden');
         toastr.error('Фильм не найден! Измените ввод и повторите попытку');
-      } else {
-        paginationBox.classList.remove('visually-hidden');
+        apiServise.query = '';
+        fetchGall();
       }
       renderMarkup(match(destructArray(results)));
       setTimeout(preloader, 200);
@@ -354,11 +352,11 @@ function makeActiveBtn() {
 }
 
 //(Ihor) делает плавный скролл на начало страницы при пагинации
-function scrollContent () {
-    header.scrollIntoView({
-        behavior: 'smooth',
-        block: 'end',
-    });
+function scrollContent() {
+  header.scrollIntoView({
+    behavior: 'smooth',
+    block: 'end',
+  });
 }
 
 function init() {
