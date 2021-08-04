@@ -96,11 +96,16 @@ function onCloseBtn(e) {
 
   // обновление карточек в разделах билиотеки при закрытии модалки
   if (renderLib.libraryLink.classList.contains('current-page')) {
-    if (renderLib.watchedQueueFlag == true) {
-    renderLib.firstSixMovies('watched movies')
+    const watchedB = document.querySelector('.watched-js')
+    const queueB = document.querySelector('.queue-js')
+    
+    if (watchedB.classList.contains('enabled-btn')) {
+      renderLib.firstSixMovies('watched movies');
     } else {
-    renderLib.firstSixMovies('In queue')
-    }
+      if (queueB.classList.contains('enabled-btn')) {
+        renderLib.firstSixMovies('In queue');
+      };
+    };
   };
 
   window.removeEventListener('keyup', onKeyClose);
