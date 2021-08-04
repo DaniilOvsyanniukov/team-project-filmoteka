@@ -256,3 +256,47 @@
   width: 14px;
   height: 14px;
 }
+
+// Видео трейлер стили
+.youTube-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 350px;
+  background-color: aqua;
+  z-index: 2000;
+}
+.youTube-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: red;
+  width: 30px;
+  height: 30px;
+  border: none;
+  cursor: pointer;
+  width: 14px;
+  height: 14px;
+}
+
+.youtube-btn {
+  position: absolute;
+  box-sizing: inherit;
+  width: 100px;
+  height: 50px;
+  border-radius: 5px;
+  padding: 14px 38px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  color: rgb(179, 18, 18);
+
+  top: 100px;
+  right: 100px;
+  background-color: rgb(179, 18, 18);
+  width: 50px;
+  height: 50px;
+  border: 1px;
+  cursor: pointer;
+}

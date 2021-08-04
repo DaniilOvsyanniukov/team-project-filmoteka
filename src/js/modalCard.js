@@ -13,6 +13,7 @@ const refs = {
 };
 
 galRefs.gallery.addEventListener('click', onGallery);
+galRefs.vidoCloseBtn.addEventListener('click', clearSpaceFromVideo);
 refs.closeBtn.addEventListener('click', onCloseBtn);
 refs.backdrop.addEventListener('click', onBackdrop);
 
@@ -29,6 +30,7 @@ function onGallery(e) {
   if (e.target.tagName.toLowerCase() !== 'img') return;
 
   if (repeatInWatch === true && repeatInQueue === true) {
+    
     
     apiService.fetchMovieDetails(e.target.dataset.action).then(data => {
       data.wbuttonText = 'Remove from watched'
@@ -82,11 +84,18 @@ function appendInModalCard(data) {
 
 function clearModalMovieCardContainer() {
   refs.movieCardContainer.innerHTML = '';
+  galRefs.videoContainer.innerHTML = '';
+  galRefs.youTubeModal.classList.add('is-hidden');
+
 };
 
 
 function onCloseBtn(e) {
   refs.backdrop.classList.add('is-hidden');
+
+  galRefs.videoContainer.innerHTML = '';
+  galRefs.youTubeModal.classList.add('is-hidden');
+  galRefs.vidoCloseBtn.removeEventListener('click', onKeyClose);
 
   window.removeEventListener('keyup', onKeyClose);
 };
@@ -103,4 +112,10 @@ function onKeyClose(e) {
   if (e.code === 'Escape') {
     onCloseBtn();
   };
+};
+
+function clearSpaceFromVideo() {
+  galRefs.videoContainer.innerHTML = '';
+  galRefs.youTubeModal.classList.add('is-hidden');
+  galRefs.vidoCloseBtn.removeEventListener('click', onKeyClose);
 };
