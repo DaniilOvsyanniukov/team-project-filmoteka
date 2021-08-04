@@ -152,3 +152,10 @@ function renewParam(num) {
   visualNumberOfItems = num;
   startIndex = num;
 }
+
+// экспортировал в modalCard.js для обновления списка в категориях при onCloseBtn()
+export default {
+  watchedQueueFlag,
+  libraryLink,
+  firstSixMovies,
+}
