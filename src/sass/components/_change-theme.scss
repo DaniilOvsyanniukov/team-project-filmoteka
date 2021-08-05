@@ -42,6 +42,10 @@ body.dark-theme {
     background-color: var(--footer-color-text);
   }
 
+  .lightbox__content {
+    background-color: var(--black);
+  }
+
   .add-btn {
     background-color: var(--white);
     color: var(--black);
