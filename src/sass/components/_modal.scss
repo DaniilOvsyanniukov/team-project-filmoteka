@@ -261,3 +261,62 @@
   width: 14px;
   height: 14px;
 }
+
+// Видео трейлер стили
+
+.youtube-btn {
+  position: absolute;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: inherit;
+  width: 328.5px;
+  height: 477px;
+  border-radius: 5px;
+
+  outline: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+
+  top: 20%;
+  right: 40%;
+
+  @media screen and (max-width: 479px) {
+    top: 30%;
+  }
+
+  @media screen and (min-width: 480px) and (max-width: 767px) {
+    top: 30%;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    top: 40%;
+    right: 70%;
+  }
+
+  @media screen and (min-width: 1024px) {
+    top: 50px;
+    left: 30px;
+  }
+
+  &:hover,
+  &:focus {
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 1;
+    transition: opacity var(--animation-duration) var(--timing-function);
+  }
+
+  .modal-movie-poster:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+    transition: opacity var(--animation-duration) var(--timing-function);
+  }
+}
+.modal-play-icon {
+  // fill: red;
+  background: url('../images/play2.svg') no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  pointer-events: none;
+}

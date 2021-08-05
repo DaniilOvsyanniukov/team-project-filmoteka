@@ -21,6 +21,7 @@ let watchedLocalLength = 0;
 let queueLocalLength = 0;
 
 galRefs.gallery.addEventListener('click', onGallery);
+galRefs.vidoCloseBtn.addEventListener('click', clearSpaceFromVideo);
 refs.closeBtn.addEventListener('click', onCloseBtn);
 refs.backdrop.addEventListener('click', onBackdrop);
 
@@ -89,10 +90,16 @@ function appendInModalCard(data) {
 
 function clearModalMovieCardContainer() {
   refs.movieCardContainer.innerHTML = '';
+  galRefs.videoContainer.innerHTML = '';
+  galRefs.youTubeModal.classList.add('is-hidden');
 }
 
 function onCloseBtn(e) {
   refs.backdrop.classList.add('is-hidden');
+  
+  galRefs.videoContainer.innerHTML = '';
+  galRefs.youTubeModal.classList.add('is-hidden');
+  galRefs.vidoCloseBtn.removeEventListener('click', onKeyClose);
 
   if (home.classList.contains('current-page')) {
     return;
@@ -160,3 +167,10 @@ function matchLoaclStrage(key) {
     return false;
   }
 }
+
+function clearSpaceFromVideo() {
+  galRefs.videoContainer.innerHTML = '';
+  galRefs.youTubeModal.classList.add('is-hidden');
+  galRefs.vidoCloseBtn.removeEventListener('click', onKeyClose);
+};
+
