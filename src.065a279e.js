@@ -44,4 +44,4 @@ const e={LIGHT:"light-theme",DARK:"dark-theme"},t=document.querySelector("body")
 },{}],"Focm":[function(require,module,exports) {
 "use strict";require("./sass/main.scss"),require("./js/header.js"),require("./js/modalCard"),require("./js/localStorage"),require("./js/input.js"),require("./js/footer-modal.js"),require("./js/change-theme.js"),require("./js/library.js");
 },{"./sass/main.scss":"clu1","./js/header.js":"cGsR","./js/modalCard":"kE3q","./js/localStorage":"nnQC","./js/input.js":"vYOj","./js/footer-modal.js":"zUU9","./js/change-theme.js":"yj0S","./js/library.js":"BfNj"}]},{},["Focm"], null)
-//# sourceMappingURL=/team-project-filmoteka/src.0086365e.js.map
+//# sourceMappingURL=/team-project-filmoteka/src.065a279e.js.map
