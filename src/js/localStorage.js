@@ -46,7 +46,7 @@ function onModalButtons(e) {
       }
     }
       //Добавляем видео из ютуба
-    else if (e.target.hasAttribute('data-tailer')) {
+    else if (e.target.hasAttribute('data-tailer')) {if(refs.videoContainer.classList.contains('olreadyWatching')){return}
     API.fatchTrailerSearch(id).then(el => {
       return el.results.find(el => {
         const videoTitle = el.name.split(' ')
@@ -54,6 +54,7 @@ function onModalButtons(e) {
       })
     }).then(el => {
       refs.videoContainer.insertAdjacentHTML('beforeend', renderTrailer(el));
+      refs.videoContainer.classList.add('olreadyWatching');
       refs.youTubeModal.classList.remove('is-hidden');
     })
   }
@@ -89,18 +90,5 @@ function destructObj({
     genres,
   };
 }
-
-function youTubeOnCloseBtn(e) {
-  youTubeModal.classList.add('is-hidden');
-
-  vidoCloseBtn.removeEventListener('click', youTubeOnKeyClose);
-};
-
-
-function youTubeOnKeyClose(e) {
-  if (e.code === 'Escape') {
-    youTubeOnCloseBtn();
-  };
-};
 
 // localStorage.clear()

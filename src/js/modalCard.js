@@ -106,6 +106,13 @@ function clearModalMovieCardContainer() {
 
 function onCloseBtn(e) {
   refs.backdrop.classList.add('is-hidden');
+
+  galRefs.videoContainer.innerHTML = '';
+  galRefs.videoContainer.classList.remove('olreadyWatching');
+  galRefs.youTubeModal.classList.add('is-hidden');
+  galRefs.vidoCloseBtn.removeEventListener('click', onKeyClose);
+
+
   if (home.classList.contains('current-page')) {
     return;
   } else if (library.classList.contains('current-page')) {
@@ -199,6 +206,7 @@ function ifLocalEmpty(key) {
 
 function clearSpaceFromVideo() {
   galRefs.videoContainer.innerHTML = '';
+  galRefs.videoContainer.classList.remove('olreadyWatching');
   galRefs.youTubeModal.classList.add('is-hidden');
   galRefs.vidoCloseBtn.removeEventListener('click', onKeyClose);
 }
