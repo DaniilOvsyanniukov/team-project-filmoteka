@@ -33,11 +33,11 @@ function onLibraryLinkCLick(event) {
   watchedQueueFlag = true;
   // изменяет хедер визуально
   //yarik
-  searchForm.classList.add('visually-hidden');
-  homePageLink.classList.remove('current-page');
-  libraryLink.classList.add('current-page');
-  header.classList.remove('header-home');
-  header.classList.add('header-library');
+  searchForm.classList.add('visually-hidden'); // прячет инпут
+  homePageLink.classList.remove('current-page'); // убирает псевдоэлемент ссылки хоум
+  libraryLink.classList.add('current-page'); // и добавляет псевдоэлемент на лайбрари
+  header.classList.remove('header-home'); // смена класса хэдера для изменения фонового изображения
+  header.classList.add('header-library'); // смена класса хэдера для изменения фонового изображения
   //
   // вызывает функцию которая рендерит карточки из локалсторедж (renderMarkupFromLocalStorage)
   // вызывает функцию проверку, если локалсторедж пуст, то на галерею вешается фоновый рисунок и надпись No movies (heightForGalleryBackgroundImg)

@@ -2,9 +2,10 @@
 <header class="header header-home header-js" id="Home">
     <div class="container">
 
+        <!-- верхнее навигационное меню -->
         <nav class="nav">
             <a href="./index.html" class="main-page-link">
-                <svg class="header-logo" width="24" height="24">
+                <svg class="header-logo" width="24" height="24" viewbox="0 0 24 24">
                     <use href="./images/sprite.svg#icon-film"></use>
                 </svg>
                 <span class="site-title">Filmoteka</span>
@@ -21,20 +22,20 @@
             
         </nav>
 
-        <!-- <span class="input-wrapper"> -->
-            <form action="" class="search-form search-form-js">
-                <input class="search-form-input" 
-                    type="text" 
-                    name="query" 
-                    placeholder="Поиск фильмов" 
-                    autocomplete="off">   
-                <svg class="search-input-icon" width="12" height="12">
-                    <use href="./images/sprite.svg#icon-search"></use>
-                </svg>
-            </form>
-        <!-- </span> -->
+       <!-- инпут на странице хоум -->
+        <form action="" class="search-form search-form-js">
+            <input class="search-form-input" 
+                type="text" 
+                name="query" 
+                placeholder="Поиск фильмов" 
+                autocomplete="off">   
+            <svg class="search-input-icon" width="12" height="12">
+                <use href="./images/sprite.svg#icon-search"></use>
+            </svg>
+        </form>
+       
         
-
+        <!-- кнопки на странице библиотеки -->
         <ul class="buttons list visually-hidden buttons-library-js">
             <li class="buttons-item">
                 <button type="button" class="library-btn enabled-btn watched-js">Watched</button>
