@@ -17,6 +17,9 @@ const refs = {
   closeBtn: document.querySelector('.close-btn'),
 };
 
+let watchedLocalLength = 0;
+let queueLocalLength = 0;
+
 galRefs.gallery.addEventListener('click', onGallery);
 refs.closeBtn.addEventListener('click', onCloseBtn);
 refs.backdrop.addEventListener('click', onBackdrop);
@@ -24,9 +27,14 @@ refs.backdrop.addEventListener('click', onBackdrop);
 function onGallery(e) {
   e.preventDefault();
 
+  // console.log('watchedLocalLength', watchedLocalLength);
+  // console.log('queueLocalLength', queueLocalLength);
   if (e.target.classList.contains('modal')) {
     return;
   } else {
+    // Переменные которые нужны для корректного закрытия окна ,если ы открыли и ничего не удалили то просто сверяются длины локал сторедж
+    watchedLocalLength = JSON.parse(localStorage.getItem('watched movies')).length;
+    queueLocalLength = JSON.parse(localStorage.getItem('In queue')).length;
     const id = JSON.parse(e.target.dataset.action);
     const watchedList = JSON.parse(localStorage.getItem('watched movies') || '[]');
     const queueList = JSON.parse(localStorage.getItem('In queue') || '[]');
@@ -90,13 +98,22 @@ function onCloseBtn(e) {
     return;
   } else if (library.classList.contains('current-page')) {
     if (watchedQueueFlag) {
-      renewParam(6);
-      firstSixMovies('watched movies');
+      if (matchLoaclStrage('watched movies')) {
+        return;
+      } else {
+        renewParam(6);
+        firstSixMovies('watched movies');
+        scrollContent();
+      }
     } else {
-      renewParam(6);
-      firstSixMovies('In queue');
+      if (matchLoaclStrage('In queue')) {
+        return;
+      } else {
+        renewParam(6);
+        firstSixMovies('In queue');
+        scrollContent();
+      }
     }
-    scrollContent();
   }
 
   // обновление карточек в разделах билиотеки при закрытии модалки
@@ -112,7 +129,6 @@ function onCloseBtn(e) {
   //     };
   //   };
   // };
-
 
   window.removeEventListener('keyup', onKeyClose);
 }
@@ -134,4 +150,13 @@ function scrollContent() {
     behavior: 'smooth',
     block: 'end',
   });
+}
+
+function matchLoaclStrage(key) {
+  const lengthLocal = JSON.parse(localStorage.getItem(key)).length;
+  if (lengthLocal === watchedLocalLength || lengthLocal === queueLocalLength) {
+    return true;
+  } else {
+    return false;
+  }
 }
