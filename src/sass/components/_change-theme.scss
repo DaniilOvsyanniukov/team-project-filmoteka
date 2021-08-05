@@ -16,8 +16,12 @@ body.dark-theme {
   .pagination-btn {
     &:hover,
     &:focus {
-      color: var(--black); // (Ihor) меняет цвет номерков при ховере
+      color: var(--black); // (Ihor) изменяет цвет номерков при ховере
     }
+  }
+
+  .dots{
+    color: var(--white); // (Ihor) изменяет цвет точек
   }
 
   .close-btn,

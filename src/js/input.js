@@ -24,18 +24,11 @@ toastr.options = {
 };
 
 const apiServise = new ApiServise();
+
 //  (Ihor) объявление переменных и ссылок для пагинации
 let currentPage = 1;
 let totalPages;
 const pageRange = 2;
-
-const paginationList = document.querySelector('.pagination-mid');
-const pageList = document.querySelector('.pages');
-const lastBtn = document.getElementById('last-page');
-const prevBtn = document.getElementById('button-prev');
-const nextBtn = document.getElementById('button-next');
-const firstPage = document.querySelector('.first');
-const lastPage = document.querySelector('.last');
 
 init(); //(Ihor)  отрисовка страницы при первой загрузке
 
@@ -120,7 +113,7 @@ function onSearchForm(e) {
 
   clearGallery();
   clearInput(e);
-  pageList.innerHTML = '';
+  refs.pageList.innerHTML = '';
 
   refs.preloader.classList.remove('done');
   apiServise.resetPage();
@@ -179,25 +172,6 @@ function destructArray(arr) {
   );
 }
 
-function destructObj({ id, backdrop_path, original_title, poster_path, genre_ids, release_date }) {
-  return {
-    id,
-    backdrop_path,
-    original_title,
-    poster_path,
-    genre_ids,
-    release_date,
-    dataMovie: JSON.stringify({
-      id,
-      backdrop_path,
-      original_title,
-      poster_path,
-      genre_ids,
-      release_date,
-    }),
-  };
-}
-
 //ф-ция для отображения загрузчика
 function preloader() {
   if (!refs.preloader.classList.contains('done')) {
@@ -213,7 +187,7 @@ function searchFetch() {
     .fetchMoviesByRequest()
     .then(data => {
       totalPages = data.total_pages;
-      lastBtn.textContent = totalPages;
+      refs.lastBtn.textContent = totalPages;
       // console.log(data)
       init();
       return data.results;
@@ -221,6 +195,8 @@ function searchFetch() {
     .then(results => {
       if (results.length < 1) {
         toastr.error('Фильм не найден! Измените ввод и повторите попытку');
+        apiServise.query = '';
+        fetchGall();
       }
       renderMarkup(match(destructArray(results)));
       setTimeout(preloader, 200);
@@ -234,7 +210,7 @@ function fetchGall() {
     .fetchPopularMovies()
     .then(data => {
       totalPages = data.total_pages;
-      lastBtn.textContent = totalPages;
+      refs.lastBtn.textContent = totalPages;
       // console.log(data)
       init();
       return data.results;
@@ -247,9 +223,9 @@ function fetchGall() {
     .catch(error => console.log(error));
 }
 
-paginationList.addEventListener('click', onBtnClick);
-prevBtn.addEventListener('click', onPrevBtnClick);
-nextBtn.addEventListener('click', onNextBtnClick);
+refs.paginationList.addEventListener('click', onBtnClick);
+refs.prevBtn.addEventListener('click', onPrevBtnClick);
+refs.nextBtn.addEventListener('click', onNextBtnClick);
 
 // (Ihor) изменение нумерации при клике на кнопки с цифрами
 function onBtnClick(evt) {
@@ -260,10 +236,11 @@ function onBtnClick(evt) {
   }
 
   refs.gallery.innerHTML = '';
-  pageList.innerHTML = '';
+  refs.pageList.innerHTML = '';
 
   currentPage = Number(evt.target.textContent);
   apiServise.pagination(currentPage);
+  scrollContent();
 
   if (apiServise.query) {
     searchFetch();
@@ -280,8 +257,9 @@ function onPrevBtnClick(evt) {
     currentPage -= 1;
   }
   refs.gallery.innerHTML = '';
-  pageList.innerHTML = '';
+  refs.pageList.innerHTML = '';
   apiServise.pagination(currentPage);
+  scrollContent();
 
   if (apiServise.query) {
     searchFetch();
@@ -298,8 +276,9 @@ function onNextBtnClick(evt) {
     currentPage += 1;
   }
   refs.gallery.innerHTML = '';
-  pageList.innerHTML = '';
+  refs.pageList.innerHTML = '';
   apiServise.pagination(currentPage);
+  scrollContent();
 
   if (apiServise.query) {
     searchFetch();
@@ -315,7 +294,7 @@ function renderPagesList() {
 
   for (let i = start; i <= end; i += 1) {
     if (i > 0 && i <= totalPages) {
-      pageList.insertAdjacentHTML(
+      refs.pageList.insertAdjacentHTML(
         'beforeend',
         `<li class="pages-item"><button type="button" class="pagination-btn">${i}</button></li>`,
       );
@@ -325,24 +304,32 @@ function renderPagesList() {
 
 // (Ihor) скрывает и показывает первую и последнюю кнопки
 function hideFirstLastBtn() {
-  currentPage < 4 ? (firstPage.hidden = true) : (firstPage.hidden = false);
-  currentPage > totalPages - 3 ? (lastPage.hidden = true) : (lastPage.hidden = false);
+  currentPage < 4 ? (refs.firstPage.hidden = true) : (refs.firstPage.hidden = false);
+  currentPage > totalPages - 3 ? (refs.lastPage.hidden = true) : (refs.lastPage.hidden = false);
 }
 
 // (Ihor) делает неактивными кнопки-стрелки
 function checkBtnOpacity() {
-  currentPage === 1 ? (prevBtn.disabled = true) : (prevBtn.disabled = false);
-  currentPage === totalPages ? (nextBtn.disabled = true) : (nextBtn.disabled = false);
+  currentPage === 1 ? (refs.prevBtn.disabled = true) : (refs.prevBtn.disabled = false);
+  currentPage === totalPages ? (refs.nextBtn.disabled = true) : (refs.nextBtn.disabled = false);
 }
 
 // (Ihor) делает активную кнопку
 function makeActiveBtn() {
-  let pagesMenu = pageList.querySelectorAll('button');
+  let pagesMenu = refs.pageList.querySelectorAll('button');
   for (let i = 0; i < pagesMenu.length; i += 1) {
     if (Number(pagesMenu[i].textContent) === currentPage) {
       pagesMenu[i].classList.add('active-btn');
     }
   }
+}
+
+//(Ihor) делает плавный скролл на начало страницы при пагинации
+function scrollContent() {
+  refs.header.scrollIntoView({
+    behavior: 'smooth',
+    block: 'end',
+  });
 }
 
 function init() {
