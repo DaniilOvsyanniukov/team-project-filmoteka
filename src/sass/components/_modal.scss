@@ -26,15 +26,18 @@
   }
 
   &-poster-container {
-    max-width: inherit;
-    max-height: 356px;
+    @media screen and (max-width: 767px) {
+      width: 240px;
+      max-height: 356px;
+    }
+    overflow: hidden;
     margin-bottom: 30px;
     border-radius: 5px;
-    overflow: hidden;
   }
 
   &-movie-poster {
-    max-height: inherit;
+    width: inherit;
+    height: inherit;
   }
 
   &-movie-title {
@@ -43,6 +46,9 @@
     line-height: 1.15;
     margin-bottom: 20px;
   }
+}
+.modal-movie-card {
+  display: block;
 }
 
 .card-descr-elements {
@@ -161,7 +167,7 @@
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 768px) and (max-width: 1023px) {
   .modal {
     width: 618px;
     height: 562px;
@@ -185,7 +191,7 @@
 
     &-movie-poster {
       height: inherit;
-      //width: inherit;
+      width: inherit;
     }
 
     &-movie-title {
@@ -232,10 +238,14 @@
     &-movie-title {
       font-size: 30px;
     }
+
+    &-card-container {
+      width: 822px;
+    }
   }
 
   .card-descr-container {
-    max-width: 396px;
+    width: 396px;
   }
 
   .add-btn {
@@ -243,6 +253,10 @@
   }
   .original {
     max-width: 260px;
+  }
+  .modal-movie-card {
+    display: flex;
+    width: 822px;
   }
 }
 
