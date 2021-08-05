@@ -13,9 +13,9 @@ const homePageLink = document.querySelector('.home-js');
 const header = document.querySelector('.header-js');
 const sentinel = document.getElementById('sentinel');
 
-let watchedQueueFlag = true; // флаг для определения какой ключ брать из ока сторедж
-let visualNumberOfItems = 6; // индекс для конца обрезки массива из локал
-let startIndex = 6; // индекс для начала обрезки массива из локал
+export let watchedQueueFlag = true; // флаг для определения какой ключ брать из ока сторедж
+export let visualNumberOfItems = 6; // индекс для конца обрезки массива из локал
+export let startIndex = 6; // индекс для начала обрезки массива из локал
 
 //Вешаю слушателей на кнопки и мою библиотеку
 libraryLink.addEventListener('click', onLibraryLinkCLick);
@@ -127,7 +127,7 @@ const interObserv = new IntersectionObserver(onEntry, options);
 // применяем свойство экземплра которое указвает за кем мы должн наблюдать
 interObserv.observe(sentinel);
 // функция для рендеринга первых шести фильмов из локал,
-function firstSixMovies(key) {
+export function firstSixMovies(key) {
   gallery.innerHTML = '';
   const moviesFromLocalStorage = JSON.parse(localStorage.getItem(key));
   // проверка массива объектов по разным кейсам
@@ -148,7 +148,9 @@ function firstSixMovies(key) {
   gallery.insertAdjacentHTML('beforeend', movieMarkup(firstSix));
 }
 // функция для обновлeния параметров обрезки при перезагрузки страницы
-function renewParam(num) {
+export function renewParam(num) {
   visualNumberOfItems = num;
   startIndex = num;
 }
+
+// экспортировал в modalCard.js для обновления списка в категориях при onCloseBtn()
