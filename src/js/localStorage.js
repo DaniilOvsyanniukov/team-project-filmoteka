@@ -1,4 +1,6 @@
 import ApiService from './api-service';
+import renderTrailer from '../templates/trailer.hbs'
+import refs from './refs';
 
 const API = new ApiService();
 
@@ -43,6 +45,18 @@ function onModalButtons(e) {
         });
       }
     }
+      //Добавляем видео из ютуба
+    else if (e.target.hasAttribute('data-tailer')) {
+    API.fatchTrailerSearch(id).then(el => {
+      return el.results.find(el => {
+        const videoTitle = el.name.split(' ')
+          return videoTitle.some(el => el === "Trailer")
+      })
+    }).then(el => {
+      refs.videoContainer.insertAdjacentHTML('beforeend', renderTrailer(el));
+      refs.youTubeModal.classList.remove('is-hidden');
+    })
+  }
   }
 }
 
@@ -75,5 +89,18 @@ function destructObj({
     genres,
   };
 }
+
+function youTubeOnCloseBtn(e) {
+  youTubeModal.classList.add('is-hidden');
+
+  vidoCloseBtn.removeEventListener('click', youTubeOnKeyClose);
+};
+
+
+function youTubeOnKeyClose(e) {
+  if (e.code === 'Escape') {
+    youTubeOnCloseBtn();
+  };
+};
 
 // localStorage.clear()

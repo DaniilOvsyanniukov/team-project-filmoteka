@@ -43,6 +43,15 @@ export default class ApiServise {
       // })
 
   }
+      // Поиск видео с ютуба
+  fatchTrailerSearch(movieId){
+    const url = `${BASE_URL}/movie/${movieId}/videos?api_key=${API_KEY}&language=en-US`;
+      return fetch(url)
+      .then(response => response.json())
+      .then(data => {
+      return data;
+      })
+  }
 
   incrementPage() {
     this.page += 1;
