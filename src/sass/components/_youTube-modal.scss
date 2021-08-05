@@ -8,27 +8,25 @@
   justify-content: center;
   align-items: center;
   z-index: 2000;
-
-  @media screen and (max-width: 479px) {
-    //   width: 250px;
-    //   height: 162px;
+}
+.youTube-video-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.video-player {
+  @media screen and (max-width: 767px) {
+    width: 280px;
+    height: 85%;
   }
-
-  @media screen and (min-width: 480px) and (max-width: 767px) {
-    // width: 180px;
-    // height: 162px;
-  }
-
   @media screen and (min-width: 768px) and (max-width: 1023px) {
-    padding: 25px;
-    // width: 618px;
-    // height: 302px;
+    width: 618px;
+    height: 562px;
   }
-
   @media screen and (min-width: 1024px) {
-    padding: 40px;
-    // max-width: 900px;
-    // max-height: 700px;
+    width: 882px;
+    height: 575px;
   }
 }
 
@@ -49,8 +47,19 @@
 
 .youTube-close-btn {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  @media screen and (max-width: 767px) {
+    top: calc(50% - 90px);
+    right: calc(50% - 157px);
+  }
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    top: calc(50% - 300px);
+    right: calc(50% - 325px);
+  }
+  @media screen and (min-width: 1024px) {
+    top: calc(50% - 310px);
+    right: calc(50% - 460px);
+  }
+
   background-color: red;
   width: 30px;
   height: 30px;
@@ -78,8 +87,6 @@
   justify-content: center;
   align-items: center;
   box-sizing: inherit;
-  width: 328.5px;
-  height: 477px;
   border-radius: 5px;
 
   outline: none;
@@ -90,22 +97,11 @@
   top: 20%;
   right: 40%;
 
-  @media screen and (max-width: 479px) {
-    top: 30%;
+  @media screen and (max-width: 767px) {
   }
-
-  @media screen and (min-width: 480px) and (max-width: 767px) {
-    top: 30%;
-  }
-
   @media screen and (min-width: 768px) and (max-width: 1023px) {
-    top: 40%;
-    right: 70%;
   }
-
   @media screen and (min-width: 1024px) {
-    top: 50px;
-    left: 30px;
   }
 
   &:hover,
