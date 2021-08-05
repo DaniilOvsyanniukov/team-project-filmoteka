@@ -85,6 +85,7 @@ function clearModalMovieCardContainer() {
 
 function onCloseBtn(e) {
   refs.backdrop.classList.add('is-hidden');
+
   if (home.classList.contains('current-page')) {
     return;
   } else if (library.classList.contains('current-page')) {
@@ -111,6 +112,7 @@ function onCloseBtn(e) {
   //     };
   //   };
   // };
+
 
   window.removeEventListener('keyup', onKeyClose);
 }
