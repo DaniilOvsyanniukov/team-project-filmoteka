@@ -14,7 +14,7 @@ modal.addEventListener('click', onModalButtons);
 
 function onModalButtons(e) {
   e.preventDefault();
-  if (!e.target.classList.contains('watched') && !e.target.classList.contains('queue')) {
+  if (!e.target.classList.contains('watched') && !e.target.classList.contains('queue') && !e.target.classList.contains('youtubeBtn-js')) {
     return;
   } else {
     const id = JSON.parse(e.target.dataset.id);
