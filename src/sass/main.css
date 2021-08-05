@@ -35,8 +35,8 @@ body.dark-theme .scroll-button {
 body.dark-theme .movie-card:hover {
   -webkit-transform: scale(1.01);
           transform: scale(1.01);
-  -webkit-box-shadow: 1px 4px 6px rgba(255, 255, 255, 0.16), 0px 4px 4px rgba(255, 255, 255, 0.06), 0px 1px 1px rgba(255, 255, 255, 0.12);
-          box-shadow: 1px 4px 6px rgba(255, 255, 255, 0.16), 0px 4px 4px rgba(255, 255, 255, 0.06), 0px 1px 1px rgba(255, 255, 255, 0.12);
+  -webkit-box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.6), 0px 4px 4px rgba(0, 0, 0, 0.06), 0px 1px 1px rgba(0, 0, 0, 0.12);
+          box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.6), 0px 4px 4px rgba(0, 0, 0, 0.06), 0px 1px 1px rgba(0, 0, 0, 0.12);
 }
 
 body.dark-theme .theme-switch__icon {
@@ -45,6 +45,10 @@ body.dark-theme .theme-switch__icon {
 
 body.dark-theme .modal {
   background-color: var(--footer-color-text);
+}
+
+body.dark-theme .lightbox__content {
+  background-color: var(--black);
 }
 
 body.dark-theme .add-btn {
@@ -923,15 +927,20 @@ body {
 }
 
 .modal-poster-container {
-  max-width: inherit;
-  max-height: 356px;
-  margin-bottom: 30px;
-  border-radius: 5px;
   overflow: hidden;
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 767px) {
+  .modal-poster-container {
+    width: 240px;
+    height: 360px;
+  }
 }
 
 .modal-movie-poster {
-  max-height: inherit;
+  width: inherit;
+  height: inherit;
 }
 
 .modal-movie-title {
@@ -939,6 +948,10 @@ body {
   font-size: 20px;
   line-height: 1.15;
   margin-bottom: 20px;
+}
+
+.modal-movie-card {
+  display: block;
 }
 
 .card-descr-elements {
@@ -1063,7 +1076,7 @@ body {
   border: none;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 768px) and (max-width: 1023px) {
   .modal {
     width: 618px;
     height: 562px;
@@ -1078,7 +1091,7 @@ body {
     display: flex;
   }
   .modal-poster-container {
-    max-height: 373px;
+    height: 373px;
     width: 264px;
     margin-right: 32px;
     margin-bottom: 0;
@@ -1117,25 +1130,34 @@ body {
     height: 568px;
     padding-bottom: 40px;
     padding-top: 50px;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 62px;
+    padding-right: 62px;
   }
   .modal-poster-container {
-    max-height: 477px;
-    width: 396px;
-    margin-right: 30px;
+    height: 450px;
+    width: 300px;
+    margin-right: 62px;
   }
   .modal-movie-title {
     font-size: 30px;
   }
+  .modal-card-container {
+    width: 758px;
+  }
   .card-descr-container {
-    max-width: 396px;
+    width: 396px;
   }
   .add-btn {
     width: 136px;
   }
   .original {
     max-width: 260px;
+  }
+  .modal-movie-card {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 758px;
   }
 }
 
@@ -1148,6 +1170,12 @@ body {
   height: 30px;
   border: none;
   cursor: pointer;
+}
+
+.close-btn:hover, .close-btn:focus {
+  border-radius: 50%;
+  background-color: rgba(233, 101, 24, 0.5);
+  fill: var(--white);
 }
 
 .modal-close-icon {
@@ -1690,8 +1718,33 @@ body {
   border: none;
   cursor: pointer;
   opacity: 0;
-  top: 20%;
-  right: 40%;
+}
+
+@media screen and (max-width: 767px) {
+  .youtube-btn {
+    top: 45px;
+    left: 20px;
+    width: 240px;
+    height: 360px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .youtube-btn {
+    top: 40px;
+    left: 30px;
+    width: 264px;
+    height: 373px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .youtube-btn {
+    top: 50px;
+    left: 62px;
+    height: 450px;
+    width: 300px;
+  }
 }
 
 .youtube-btn:hover, .youtube-btn:focus {
