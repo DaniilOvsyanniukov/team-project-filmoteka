@@ -1,8 +1,16 @@
 import ApiService from './api-service';
 import galRefs from './refs';
+import movieCardLibraryMarkUp from '../templates/library-movie-card.hbs';
 
 import movieDetails from '../templates/modal-movie-card.hbs';
-import { watchedQueueFlag, renewParam, firstSixMovies } from './library';
+import {
+  watchedQueueFlag,
+  renewParam,
+  firstSixMovies,
+  sliceGanresDate,
+  gallery,
+  titleNoMovie,
+} from './library';
 const headerScroll = document.querySelector('.header');
 
 const apiService = new ApiService();
@@ -34,8 +42,10 @@ function onGallery(e) {
     return;
   } else {
     // Переменные которые нужны для корректного закрытия окна ,если ы открыли и ничего не удалили то просто сверяются длины локал сторедж
-    watchedLocalLength = JSON.parse(localStorage.getItem('watched movies')).length;
-    queueLocalLength = JSON.parse(localStorage.getItem('In queue')).length;
+    watchedLocalLength = JSON.parse(localStorage.getItem('watched movies') || '[]');
+    watchedLocalLength = watchedLocalLength.length;
+    queueLocalLength = JSON.parse(localStorage.getItem('In queue') || '[]');
+    queueLocalLength = queueLocalLength.length;
     const id = JSON.parse(e.target.dataset.action);
     const watchedList = JSON.parse(localStorage.getItem('watched movies') || '[]');
     const queueList = JSON.parse(localStorage.getItem('In queue') || '[]');
@@ -96,11 +106,12 @@ function clearModalMovieCardContainer() {
 
 function onCloseBtn(e) {
   refs.backdrop.classList.add('is-hidden');
-  
+
   galRefs.videoContainer.innerHTML = '';
   galRefs.videoContainer.classList.remove('olreadyWatching');
   galRefs.youTubeModal.classList.add('is-hidden');
   galRefs.vidoCloseBtn.removeEventListener('click', onKeyClose);
+
 
   if (home.classList.contains('current-page')) {
     return;
@@ -109,21 +120,24 @@ function onCloseBtn(e) {
       if (matchLoaclStrage('watched movies')) {
         return;
       } else {
-        renewParam(6);
-        firstSixMovies('watched movies');
-        scrollContent();
+        renderAfterDeleteMovie('watched movies');
+        // renewParam(6);
+        // firstSixMovies('watched movies');
+        // scrollContent();
+        ifLocalEmpty('watched movies');
       }
     } else {
       if (matchLoaclStrage('In queue')) {
         return;
       } else {
-        renewParam(6);
-        firstSixMovies('In queue');
-        scrollContent();
+        renderAfterDeleteMovie('In queue');
+        // renewParam(6);
+        // firstSixMovies('In queue');
+        // scrollContent();
+        ifLocalEmpty('In queue');
       }
     }
   }
-
   // обновление карточек в разделах билиотеки при закрытии модалки
   // if (renderLib.libraryLink.classList.contains('current-page')) {
   //   const watchedB = document.querySelector('.watched-js')
@@ -161,11 +175,32 @@ function scrollContent() {
 }
 
 function matchLoaclStrage(key) {
-  const lengthLocal = JSON.parse(localStorage.getItem(key)).length;
+  let lengthLocal = JSON.parse(localStorage.getItem(key) || '[]');
+  lengthLocal = lengthLocal.length;
+  if (lengthLocal === 0) {
+    return false;
+  }
+
   if (lengthLocal === watchedLocalLength || lengthLocal === queueLocalLength) {
     return true;
   } else {
     return false;
+  }
+}
+
+function renderAfterDeleteMovie(key) {
+  galRefs.gallery.innerHTML = '';
+  const localArr = JSON.parse(localStorage.getItem(key) || '[]');
+  gallery.insertAdjacentHTML('beforeend', movieCardLibraryMarkUp(sliceGanresDate(localArr)));
+}
+
+function ifLocalEmpty(key) {
+  const localArr = JSON.parse(localStorage.getItem(key) || '[]');
+  if (localArr.length === 0) {
+    gallery.classList.add('galleryEmptySpace');
+    titleNoMovie.classList.remove('display-none');
+  } else {
+    return;
   }
 }
 
@@ -174,5 +209,4 @@ function clearSpaceFromVideo() {
   galRefs.videoContainer.classList.remove('olreadyWatching');
   galRefs.youTubeModal.classList.add('is-hidden');
   galRefs.vidoCloseBtn.removeEventListener('click', onKeyClose);
-};
-
+}

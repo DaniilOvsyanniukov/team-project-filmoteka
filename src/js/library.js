@@ -3,8 +3,8 @@ import movieMarkup from '../templates/library-movie-card.hbs';
 //Получаю доступ к элементам
 const libraryLink = document.querySelector('.library-js');
 const listOfHeaderBtns = document.querySelector('.buttons.list');
-const gallery = document.querySelector('.movie-list-js');
-const titleNoMovie = document.querySelector('.no-movie');
+export const gallery = document.querySelector('.movie-list-js');
+export const titleNoMovie = document.querySelector('.no-movie');
 const plaginationEl = document.querySelector('.pagination');
 const section = document.querySelector('.gall-js');
 //yarik
@@ -67,7 +67,7 @@ function onListOfHeadersBtns(event) {
 }
 
 //функция для обрезки жанров до 2х и обрезки дат фильмов до года
-function sliceGanresDate(arr) {
+export function sliceGanresDate(arr) {
   if (arr === null) {
     return;
   }
