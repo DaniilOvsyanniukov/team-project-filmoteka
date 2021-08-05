@@ -1,14 +1,18 @@
 import ApiService from './api-service';
+import renderTrailer from '../templates/trailer.hbs'
+import refs from './refs';
 
 const API = new ApiService();
 
 
 const modal = document.querySelector('.modal');
 
+
 const watchedList = JSON.parse(localStorage.getItem('watched movies') || '[]');
 const queueList = JSON.parse(localStorage.getItem('In queue') || '[]');
 
 modal.addEventListener('click', onModalButtons);
+
 
 function onModalButtons(e) {
   e.preventDefault();
@@ -19,6 +23,7 @@ function onModalButtons(e) {
 
     const repeatedIndexWatched = watchedList.findIndex(elem => elem.id === id);
     const repeatedIndexQueue = queueList.findIndex(elem => elem.id === id);
+
 
     if (e.target.hasAttribute('data-dir')) {
       if (e.target.classList.contains('watched') && repeatedIndexWatched !== -1) {
@@ -41,8 +46,19 @@ function onModalButtons(e) {
           insertToStorage(data, queueList, 'In queue');
           e.target.textContent = 'Remove from queue';
         });
-      }
     }
+  }
+  //Добавляем видео из ютуба
+  else if (e.target.hasAttribute('data-tailer')) {
+    API.fatchTrailerSearch(id).then(el => {
+      return el.results.find(el => {
+        const videoTitle = el.name.split(' ')
+          return videoTitle.some(el => el === "Trailer")
+      })
+    }).then(el => {
+      refs.videoContainer.insertAdjacentHTML('beforeend', renderTrailer(el));
+      refs.youTubeModal.classList.remove('is-hidden');
+    })
   }
 }
 
@@ -75,5 +91,21 @@ function destructObj({
     genres,
   };
 }
+
+
+
+function youTubeOnCloseBtn(e) {
+  youTubeModal.classList.add('is-hidden');
+
+  vidoCloseBtn.removeEventListener('click', youTubeOnKeyClose);
+};
+
+
+function youTubeOnKeyClose(e) {
+  if (e.code === 'Escape') {
+    youTubeOnCloseBtn();
+  };
+};
+
 
 // localStorage.clear()
