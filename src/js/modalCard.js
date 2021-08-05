@@ -88,6 +88,21 @@ function clearModalMovieCardContainer() {
 function onCloseBtn(e) {
   refs.backdrop.classList.add('is-hidden');
 
+
+  // обновление карточек в разделах билиотеки при закрытии модалки
+  if (renderLib.libraryLink.classList.contains('current-page')) {
+    const watchedB = document.querySelector('.watched-js')
+    const queueB = document.querySelector('.queue-js')
+    
+    if (watchedB.classList.contains('enabled-btn')) {
+      renderLib.firstSixMovies('watched movies');
+    } else {
+      if (queueB.classList.contains('enabled-btn')) {
+        renderLib.firstSixMovies('In queue');
+      };
+    };
+  };
+
   window.removeEventListener('keyup', onKeyClose);
 };
 

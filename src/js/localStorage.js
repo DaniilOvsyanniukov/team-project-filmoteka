@@ -2,7 +2,6 @@ import ApiService from './api-service';
 
 const API = new ApiService();
 
-
 const modal = document.querySelector('.modal');
 
 const watchedList = JSON.parse(localStorage.getItem('watched movies') || '[]');
